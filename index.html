@@ -25,7 +25,10 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#1a1a18;color:#e8
 .metric-value{font-size:26px;font-weight:600;color:#e8e7e2}
 .metric-value.ni{color:#378ADD}
 .metric-value.na{color:#D85A30}
-.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:2rem}
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1rem}
+.charts-row2{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:2rem}
+.is-card.ml-seller{border-left:3px solid rgba(245,166,35,.6)}
+.badge-ml{background:rgba(245,166,35,.12);color:#f5a623;font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;letter-spacing:.02em}
 .chart-card{background:#242422;border:.5px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem 1.25rem}
 .chart-title{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.75rem}
 .stitle{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
@@ -98,11 +101,18 @@ tr:last-child td{border-bottom:none}
     <div class="chart-card"><div class="chart-title">Unidades bloqueadas por IS</div><div style="position:relative;height:200px"><canvas id="chartIS"></canvas></div></div>
     <div class="chart-card"><div class="chart-title">Distribuição NI vs NA</div><div style="position:relative;height:200px"><canvas id="chartStatus"></canvas></div></div>
   </div>
+  <div class="charts-row2">
+    <div class="chart-card">
+      <div class="chart-title">⚠ Unidades bloqueadas — Sellers Mercado Livre</div>
+      <div style="position:relative;height:160px"><canvas id="chartML"></canvas></div>
+    </div>
+  </div>
+
   <p class="stitle">IS em INP agora</p>
 
   <!-- IS 64564762 -->
-  <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64564762</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
+  <div class="is-card ml-seller">
+    <div class="is-header"><div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS 64564762</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 09/abr/2026 12h27</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Eletronicos</div><div class="info-item"><strong>Doca:</strong> DK-0-020-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Bruno Miranda De Brito</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">NAUQ70863</span></td><td>90</td><td><span class="addr">NI-0-505-023-01-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -111,8 +121,8 @@ tr:last-child td{border-bottom:none}
   </div>
 
   <!-- IS 64366234 -->
-  <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64366234</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
+  <div class="is-card ml-seller">
+    <div class="is-header"><div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS 64366234</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 11/abr/2026 14h06</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div><div class="info-item"><strong>Doca:</strong> DK-0-032-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Jeferson Rodrigues De Jesus</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">ZDFY72185</span></td><td>43</td><td><span class="addr">NI-0-505-031-05-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -123,8 +133,8 @@ tr:last-child td{border-bottom:none}
   </div>
 
   <!-- IS 65337360 -->
-  <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 65337360</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
+  <div class="is-card ml-seller">
+    <div class="is-header"><div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS 65337360</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 14/abr/2026 19h31</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div><div class="info-item"><strong>Doca:</strong> DK-0-035-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Nathaly De Moraes Queiroz</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">XJBX74444</span></td><td>1</td><td><span class="addr">NI-0-505-031-01-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -145,8 +155,8 @@ tr:last-child td{border-bottom:none}
   </div>
 
   <!-- IS 65426071 -->
-  <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 65426071</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
+  <div class="is-card ml-seller">
+    <div class="is-header"><div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS 65426071</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 18/abr/2026 07h18</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div><div class="info-item"><strong>Doca:</strong> DK-0-035-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Najla Ariane Alves Barbosa</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">ECBV77928</span></td><td>3</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -157,8 +167,8 @@ tr:last-child td{border-bottom:none}
   </div>
 
   <!-- IS 64961411 -->
-  <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64961411</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
+  <div class="is-card ml-seller">
+    <div class="is-header"><div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS 64961411</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 23/abr/2026 15h26</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div><div class="info-item"><strong>Doca:</strong> DK-0-019-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Juliana Da Silva De Oliveira</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">OYZI86129</span></td><td>24</td><td><span class="addr">NI-0-505-041-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -167,8 +177,8 @@ tr:last-child td{border-bottom:none}
   </div>
 
   <!-- IS 66039520 -->
-  <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 66039520</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
+  <div class="is-card ml-seller">
+    <div class="is-header"><div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS 66039520</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 24/abr/2026 20h01</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Eletronicos</div><div class="info-item"><strong>Doca:</strong> DK-0-032-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Gabriela Dos Santos Soares</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">XCBV80917</span></td><td>36</td><td><span class="addr">NI-0-505-023-04-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -201,8 +211,8 @@ tr:last-child td{border-bottom:none}
   </div>
 
   <!-- IS 64545772 -->
-  <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64545772</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
+  <div class="is-card ml-seller">
+    <div class="is-header"><div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS 64545772</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 07/abr/2026 09h48</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Eletronicos</div><div class="info-item"><strong>Doca:</strong> DK-0-029-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Idenilde Ligorio De Aragao</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">CTUX08102</span></td><td>1</td><td><span class="addr">NI-0-505-023-03-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -362,6 +372,26 @@ function renderCharts(){
     type:'bar',
     data:{labels:isLabels,datasets:[{data:isData,backgroundColor:colors,borderRadius:4,borderSkipped:false}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:10}}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a'}}}}
+  });
+  // Gráfico ML
+  new Chart(document.getElementById('chartML'),{
+    type:'bar',
+    data:{
+      labels:['ML Casa','ML Eletronicos','Outros sellers'],
+      datasets:[
+        {label:'IS',data:[4,3,3],backgroundColor:'rgba(245,166,35,0.25)',borderColor:'rgba(245,166,35,0.6)',borderWidth:1,borderRadius:4,yAxisID:'y1'},
+        {label:'Unidades bloqueadas',data:[89,159,53],backgroundColor:['rgba(245,166,35,0.7)','rgba(245,100,35,0.7)','rgba(100,100,100,0.4)'],borderRadius:4,yAxisID:'y'}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,position:'top',labels:{color:'#888780',font:{size:11},padding:12,boxWidth:10}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:12}}},
+        y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a'},title:{display:true,text:'Unidades',color:'#5f5e5a',font:{size:10}}},
+        y1:{position:'right',beginAtZero:true,grid:{display:false},ticks:{color:'#5f5e5a',stepSize:1},title:{display:true,text:'Nº de IS',color:'#5f5e5a',font:{size:10}}}
+      }
+    }
   });
   new Chart(document.getElementById('chartStatus'),{
     type:'doughnut',
