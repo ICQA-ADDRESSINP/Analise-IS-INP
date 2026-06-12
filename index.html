@@ -58,6 +58,10 @@ tr:last-child td{border-bottom:none}
 .hist-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:5px}
 .hist-date{font-size:11px;color:#444441}
 .updated{font-size:11px;color:#444441;text-align:right;margin-top:1.5rem}
+.btn-arch{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);color:#888780;font-size:11px;font-weight:500;padding:4px 12px;border-radius:6px;cursor:pointer;transition:all .15s}
+.btn-arch:hover{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.3);color:#f5a623}
+.is-header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.empty-msg{text-align:center;padding:3rem 1rem;color:#444441;font-size:13px}
 </style>
 </head>
 <body>
@@ -88,7 +92,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 64564762 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64564762</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 64564762</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 09/abr/2026 12h27</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Eletronicos</div><div class="info-item"><strong>Doca:</strong> DK-0-020-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Bruno Miranda De Brito</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">NAUQ70863</span></td><td>90</td><td><span class="addr">NI-0-505-023-01-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -98,7 +102,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 64366234 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64366234</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 64366234</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 11/abr/2026 14h06</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div><div class="info-item"><strong>Doca:</strong> DK-0-032-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Jeferson Rodrigues De Jesus</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">ZDFY72185</span></td><td>43</td><td><span class="addr">NI-0-505-031-05-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -110,7 +114,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 65337360 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 65337360</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 65337360</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 14/abr/2026 19h31</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div><div class="info-item"><strong>Doca:</strong> DK-0-035-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Nathaly De Moraes Queiroz</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">XJBX74444</span></td><td>1</td><td><span class="addr">NI-0-505-031-01-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -121,7 +125,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 64819979 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64819979</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 64819979</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 15/abr/2026 22h16</div><div class="info-item"><strong>Vendedor:</strong> TULIPA.STORE</div><div class="info-item"><strong>Doca:</strong> DK-0-015-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Isna Emelly Costa De Jesus</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">GFQU77045</span></td><td>1</td><td><span class="addr">NI-0-505-027-03-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -132,7 +136,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 65426071 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 65426071</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 65426071</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 18/abr/2026 07h18</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div><div class="info-item"><strong>Doca:</strong> DK-0-035-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Najla Ariane Alves Barbosa</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">ECBV77928</span></td><td>3</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -144,7 +148,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 64961411 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64961411</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 64961411</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 23/abr/2026 15h26</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div><div class="info-item"><strong>Doca:</strong> DK-0-019-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Juliana Da Silva De Oliveira</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">OYZI86129</span></td><td>24</td><td><span class="addr">NI-0-505-041-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -154,7 +158,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 66039520 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 66039520</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 66039520</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 24/abr/2026 20h01</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Eletronicos</div><div class="info-item"><strong>Doca:</strong> DK-0-032-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Gabriela Dos Santos Soares</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">XCBV80917</span></td><td>36</td><td><span class="addr">NI-0-505-023-04-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -167,7 +171,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 64451077 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64451077</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 64451077</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 07/abr/2026 07h50</div><div class="info-item"><strong>Vendedor:</strong> RR20240809081205</div><div class="info-item"><strong>Doca:</strong> DK-0-010-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Ednilson Lino Dos Santos</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">UDVK70973</span></td><td>44</td><td><span class="addr">NI-0-505-029-04-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -178,7 +182,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 64180825 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64180825</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 64180825</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 08/abr/2026 07h10</div><div class="info-item"><strong>Vendedor:</strong> MULEKABAGS</div><div class="info-item"><strong>Doca:</strong> DK-0-017-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Jessica Oliveira Santos Vieira Andrade</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">MMJY71014</span></td><td>1</td><td><span class="addr">NI-0-505-029-06-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -188,7 +192,7 @@ tr:last-child td{border-bottom:none}
 
   <!-- IS 64545772 -->
   <div class="is-card">
-    <div class="is-header"><div><div class="is-number">IS 64545772</div><div class="is-meta">Analisada em 12/jun/2026</div></div><span class="badge badge-inp">Em INP</span></div>
+    <div class="is-header"><div><div class="is-number">IS 64545772</div><div class="is-meta">Analisada em 12/jun/2026</div></div><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>
     <div class="is-info"><div class="info-item"><strong>Chegada:</strong> 07/abr/2026 09h48</div><div class="info-item"><strong>Vendedor:</strong> Mercado Livre Eletronicos</div><div class="info-item"><strong>Doca:</strong> DK-0-029-000-00-00</div><div class="info-item"><strong>Responsável:</strong> Idenilde Ligorio De Aragao</div></div>
     <table><thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>
       <tr><td><span class="code">CTUX08102</span></td><td>1</td><td><span class="addr">NI-0-505-023-03-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
@@ -214,25 +218,25 @@ tr:last-child td{border-bottom:none}
 <div class="screen" id="screen-historico">
   <p class="stitle">Histórico de análises</p>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66039520 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 24/abr/2026 · Doca: DK-0-032 · Resp.: Gabriela Dos Santos Soares<br>4 produtos bloqueadores · 43 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">4×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66039520 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 24/abr/2026 · Doca: DK-0-032 · Resp.: Gabriela Dos Santos Soares<br>4 produtos bloqueadores · 43 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">4×NI</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64961411 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 23/abr/2026 · Doca: DK-0-019 · Resp.: Juliana Da Silva De Oliveira<br>1 produto bloqueador · 24 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64961411 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 23/abr/2026 · Doca: DK-0-019 · Resp.: Juliana Da Silva De Oliveira<br>1 produto bloqueador · 24 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65426071 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 18/abr/2026 · Doca: DK-0-035 · Resp.: Najla Ariane Alves Barbosa<br>3 produtos bloqueadores · 11 un. NI · 1 un. NA</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-na">1×NA</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65426071 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 18/abr/2026 · Doca: DK-0-035 · Resp.: Najla Ariane Alves Barbosa<br>3 produtos bloqueadores · 11 un. NI · 1 un. NA</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-na">1×NA</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64819979 — TULIPA.STORE</div><div class="hist-detail">Chegada: 15/abr/2026 · Doca: DK-0-015 · Resp.: Isna Emelly Costa De Jesus<br>2 produtos bloqueadores · 2 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64819979 — TULIPA.STORE</div><div class="hist-detail">Chegada: 15/abr/2026 · Doca: DK-0-015 · Resp.: Isna Emelly Costa De Jesus<br>2 produtos bloqueadores · 2 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65337360 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 14/abr/2026 · Doca: DK-0-035 · Resp.: Nathaly De Moraes Queiroz<br>2 produtos · 1 em NI · 1 já tratado</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-ok">1 tratado</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65337360 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 14/abr/2026 · Doca: DK-0-035 · Resp.: Nathaly De Moraes Queiroz<br>2 produtos · 1 em NI · 1 já tratado</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-ok">1 tratado</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64366234 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 11/abr/2026 · Doca: DK-0-032 · Resp.: Jeferson Rodrigues De Jesus<br>3 produtos · 53 un. NI · 9 un. NA</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-na">1×NA</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64366234 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 11/abr/2026 · Doca: DK-0-032 · Resp.: Jeferson Rodrigues De Jesus<br>3 produtos · 53 un. NI · 9 un. NA</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-na">1×NA</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64564762 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 09/abr/2026 · Doca: DK-0-020 · Resp.: Bruno Miranda De Brito<br>1 produto bloqueador · 90 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64564762 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 09/abr/2026 · Doca: DK-0-020 · Resp.: Bruno Miranda De Brito<br>1 produto bloqueador · 90 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64180825 — MULEKABAGS</div><div class="hist-detail">Chegada: 08/abr/2026 · Doca: DK-0-017 · Resp.: Jessica Oliveira Santos Vieira Andrade<br>1 produto bloqueador · 1 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64180825 — MULEKABAGS</div><div class="hist-detail">Chegada: 08/abr/2026 · Doca: DK-0-017 · Resp.: Jessica Oliveira Santos Vieira Andrade<br>1 produto bloqueador · 1 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64451077 — RR20240809081205</div><div class="hist-detail">Chegada: 07/abr/2026 · Doca: DK-0-010 · Resp.: Ednilson Lino Dos Santos<br>2 produtos bloqueadores · 50 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64451077 — RR20240809081205</div><div class="hist-detail">Chegada: 07/abr/2026 · Doca: DK-0-010 · Resp.: Ednilson Lino Dos Santos<br>2 produtos bloqueadores · 50 un. em NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
-  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64545772 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 07/abr/2026 · Doca: DK-0-029 · Resp.: Idenilde Ligorio De Aragao<br>12 produtos bloqueadores · 26 un. em NI · 25 já tratados</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">12×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+  <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64545772 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 07/abr/2026 · Doca: DK-0-029 · Resp.: Idenilde Ligorio De Aragao<br>12 produtos bloqueadores · 26 un. em NI · 25 já tratados</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">12×NI</span><div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div><div class="hist-date">12/jun/2026</div></div></div>
 
   <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64474727 — Mercado Livre Moda</div><div class="hist-detail">Chegada: 14/abr/2026 · Doca: DK-0-029 · Resp.: Najla Ariane Alves Barbosa<br>Nenhum produto bloqueador encontrado</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ok">Fechada</span></div><div class="hist-date">12/jun/2026</div></div></div>
 
@@ -241,12 +245,62 @@ tr:last-child td{border-bottom:none}
 
 </div>
 <script>
+// ── Arquivar ──
+function getArchived(){try{return JSON.parse(localStorage.getItem('icqa_archived')||'[]');}catch{return[];}}
+function saveArchived(arr){localStorage.setItem('icqa_archived',JSON.stringify(arr));}
+
+function arquivar(btn){
+  const card = btn.closest('.is-card');
+  const isNum = card.querySelector('.is-number').textContent.replace('IS ','').trim();
+  const archived = getArchived();
+  if(!archived.includes(isNum)) archived.push(isNum);
+  saveArchived(archived);
+  card.style.transition='opacity .3s';
+  card.style.opacity='0';
+  setTimeout(()=>{
+    card.style.display='none';
+    checkEmptyInicio();
+    updateHistorico();
+  },300);
+}
+
+function applyArchived(){
+  const archived=getArchived();
+  if(!archived.length) return;
+  document.querySelectorAll('#screen-inicio .is-card').forEach(card=>{
+    const num=card.querySelector('.is-number').textContent.replace('IS ','').trim();
+    if(archived.includes(num)) card.style.display='none';
+  });
+  checkEmptyInicio();
+  updateHistorico();
+}
+
+function checkEmptyInicio(){
+  const visible=[...document.querySelectorAll('#screen-inicio .is-card')].filter(c=>c.style.display!=='none');
+  let msg=document.getElementById('empty-inicio');
+  if(!visible.length){
+    if(!msg){msg=document.createElement('p');msg.id='empty-inicio';msg.className='empty-msg';msg.textContent='Nenhuma IS ativa no momento. Todas foram arquivadas.';document.getElementById('screen-inicio').appendChild(msg);}
+  } else if(msg) msg.remove();
+}
+
+function updateHistorico(){
+  const archived=getArchived();
+  document.querySelectorAll('#screen-historico .hist-item').forEach(item=>{
+    const isNum=item.querySelector('.hist-is').textContent.split('—')[0].replace('IS ','').trim();
+    const tag=item.querySelector('.badge-arch');
+    if(archived.includes(isNum)){
+      if(!tag){const t=document.createElement('span');t.className='badge badge-arch';t.style.cssText='background:rgba(255,255,255,.08);color:#888780';t.textContent='Arquivada';item.querySelector('.hist-tags').appendChild(t);}
+    }
+  });
+}
+
 function showScreen(id,btn){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('visible'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('visible');
   btn.classList.add('active');
   if(id==='inicio') renderCharts();
+  if(id==='historico') updateHistorico();
 }
 let chartsRendered=false;
 function renderCharts(){
@@ -267,6 +321,7 @@ function renderCharts(){
   });
 }
 renderCharts();
+applyArchived();
 </script>
 </body>
 </html>
