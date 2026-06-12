@@ -8,7 +8,9 @@
 <style>
 :root{color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,sans-serif;background-color:#1a1a18;background-image:radial-gradient(rgba(255,255,255,0.035) 1px,transparent 1px);background-size:28px 28px;color:#e8e7e2;font-size:14px;min-height:100vh}
+body{font-family:system-ui,-apple-system,sans-serif;background:#0d0d1a;color:#e8e7e2;font-size:14px;min-height:100vh;overflow-x:hidden}
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.top,.page{position:relative;z-index:1}
 .top{text-align:center;padding:2.5rem 1.5rem 0}
 .top h1{font-size:28px;font-weight:700;color:#f5a623;text-transform:uppercase;letter-spacing:.02em;margin-bottom:.4rem}
 .top p{font-size:13px;color:#888780;margin-bottom:1.5rem}
@@ -17,7 +19,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background-color:#1a1a18;bac
 .nav-btn:hover{background:#383836;color:#e8e7e2}
 .nav-btn.active{background:rgba(245,166,35,.15);border-color:rgba(245,166,35,.4);color:#f5a623}
 .search-wrap{max-width:480px;margin:0 auto 1.75rem;position:relative}
-.search-wrap input{width:100%;background:#242422;border:.5px solid rgba(255,255,255,.12);border-radius:9px;padding:9px 16px 9px 38px;font-size:13px;color:#e8e7e2;outline:none;transition:border-color .15s}
+.search-wrap input{width:100%;background:rgba(255,255,255,0.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:.5px solid rgba(255,255,255,.15);border-radius:9px;padding:9px 16px 9px 38px;font-size:13px;color:#e8e7e2;outline:none;transition:border-color .15s}
 .search-wrap input::placeholder{color:#5f5e5a}
 .search-wrap input:focus{border-color:rgba(245,166,35,.4)}
 .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.4;pointer-events:none}
@@ -25,17 +27,17 @@ body{font-family:system-ui,-apple-system,sans-serif;background-color:#1a1a18;bac
 .screen{display:none}
 .screen.visible{display:block}
 .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:2rem}
-.metric{background:#242422;border:.5px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem}
+.metric{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:.5px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem}
 .metric-label{font-size:11px;color:#5f5e5a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
 .metric-value{font-size:26px;font-weight:600;color:#e8e7e2}
 .metric-value.ni{color:#378ADD}
 .metric-value.na{color:#D85A30}
 .charts-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1rem}
 .charts-row2{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:2rem}
-.chart-card{background:#242422;border:.5px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem 1.25rem}
+.chart-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:.5px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem 1.25rem}
 .chart-title{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.75rem}
 .stitle{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
-.is-card{background:#242422;border:.5px solid rgba(255,255,255,.08);border-radius:12px;margin-bottom:1.25rem;overflow:hidden}
+.is-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:.5px solid rgba(255,255,255,.12);border-radius:12px;margin-bottom:1.25rem;overflow:hidden}
 .is-card.ml-seller{border-left:3px solid rgba(245,166,35,.6)}
 .is-header{padding:.9rem 1.25rem;border-bottom:.5px solid rgba(255,255,255,.07);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .is-number{font-size:15px;font-weight:600;color:#e8e7e2}
@@ -47,7 +49,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background-color:#1a1a18;bac
 .badge-ok{background:rgba(99,153,34,.15);color:#7ab83a}
 .badge-ml{background:rgba(245,166,35,.12);color:#f5a623;font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;letter-spacing:.02em}
 .is-header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.is-info{padding:.6rem 1.25rem;background:#1e1e1c;border-bottom:.5px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:1.5rem}
+.is-info{padding:.6rem 1.25rem;background:rgba(0,0,0,0.15);border-bottom:.5px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:1.5rem}
 .info-item{font-size:12px;color:#888780}
 .info-item strong{color:#d3d1c7;font-weight:500}
 table{width:100%;border-collapse:collapse}
@@ -61,7 +63,7 @@ tr:last-child td{border-bottom:none}
 .conclusion-text{font-size:13px;color:#b4b2a9;line-height:1.6}
 .btn-arch{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);color:#888780;font-size:11px;font-weight:500;padding:4px 12px;border-radius:6px;cursor:pointer;transition:all .15s}
 .btn-arch:hover{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.3);color:#f5a623}
-.hist-item{background:#242422;border:.5px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.hist-item{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:.5px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .hist-left{flex:1;min-width:0}
 .hist-is{font-size:14px;font-weight:600;color:#e8e7e2;margin-bottom:4px}
 .hist-detail{font-size:12px;color:#888780;line-height:1.7}
@@ -76,6 +78,7 @@ tr:last-child td{border-bottom:none}
 </head>
 <body>
 
+<canvas id="bg-canvas"></canvas>
 <div class="top">
   <h1>Histórico de Análises — IS em INP</h1>
   <p>Registro das IS analisadas, motivo de retenção e status de cada produto bloqueador.</p>
@@ -259,6 +262,83 @@ function renderCharts(){
 
 renderCharts();
 applyArchived();
+</script>
+<script>
+// ── Particles background ──
+(function(){
+  const canvas=document.getElementById('bg-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,mouse={x:-999,y:-999};
+  const N=90, CONNECT=140, MOUSE_R=180;
+  const particles=[];
+
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+
+  for(let i=0;i<N;i++) particles.push({
+    x:Math.random()*W, y:Math.random()*H,
+    vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4,
+    r:Math.random()*1.5+1
+  });
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // gradient bg
+    const g=ctx.createLinearGradient(0,0,W,H);
+    g.addColorStop(0,'#0d0d1a');
+    g.addColorStop(.5,'#0a0f2e');
+    g.addColorStop(1,'#0d0d1a');
+    ctx.fillStyle=g;
+    ctx.fillRect(0,0,W,H);
+
+    // move
+    for(const p of particles){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+    }
+
+    // connect
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<CONNECT){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(100,140,255,${(1-d/CONNECT)*.35})`;
+          ctx.lineWidth=.6;
+          ctx.stroke();
+        }
+      }
+      // mouse connection
+      const mx=particles[i].x-mouse.x, my=particles[i].y-mouse.y;
+      const md=Math.sqrt(mx*mx+my*my);
+      if(md<MOUSE_R){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(mouse.x,mouse.y);
+        ctx.strokeStyle=`rgba(180,160,255,${(1-md/MOUSE_R)*.5})`;
+        ctx.lineWidth=.8;
+        ctx.stroke();
+      }
+    }
+
+    // dots
+    for(const p of particles){
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(140,160,255,0.7)';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 </body>
 </html>
