@@ -98,7 +98,7 @@ tr:last-child td{border-bottom:none}
     <div class="metric"><div class="metric-label">Unidades em NA</div><div class="metric-value na">10</div></div>
   </div>
   <div class="charts-row">
-    <div class="chart-card"><div class="chart-title">Unidades bloqueadas por IS</div><div style="position:relative;height:200px"><canvas id="chartIS"></canvas></div></div>
+    <div class="chart-card"><div class="chart-title">Produtos bloqueados por IS</div><div style="position:relative;height:200px"><canvas id="chartIS"></canvas></div></div>
     <div class="chart-card"><div class="chart-title">Distribuição NI vs NA</div><div style="position:relative;height:200px"><canvas id="chartStatus"></canvas></div></div>
   </div>
   <div class="charts-row2">
@@ -366,12 +366,12 @@ function renderCharts(){
   if(chartsRendered)return;
   chartsRendered=true;
   const isLabels=['64545772','64451077','64180825','64564762','64366234','65337360','64819979','65426071','64961411','66039520'];
-  const isData=[26,50,1,90,62,1,2,12,24,43];
+  const isData=[12,2,1,1,3,1,2,3,1,4]; // nº de produtos distintos bloqueados por IS
   const colors=['#185fa5','#0F6E56','#5b6bb5','#378ADD','#8a3a8a','#6b8a3a','#3a6b8a','#8a6b3a','#3a8a6b','#8a3a5b'];
   new Chart(document.getElementById('chartIS'),{
     type:'bar',
-    data:{labels:isLabels,datasets:[{data:isData,backgroundColor:colors,borderRadius:4,borderSkipped:false}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:10}}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a'}}}}
+    data:{labels:isLabels,datasets:[{label:'Produtos bloqueados',data:isData,backgroundColor:colors,borderRadius:4,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw} produto${ctx.raw!==1?'s':''} bloqueado${ctx.raw!==1?'s':''}`}}},scales:{x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:10}}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a',stepSize:1}}}}
   });
   // Gráfico ML
   new Chart(document.getElementById('chartML'),{
