@@ -3,211 +3,221 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard IS em INP</title>
+<title>ICQA — Análise IS em INP</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
-  :root { color-scheme: light; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, -apple-system, sans-serif; background: #f5f4f0; color: #1a1a18; font-size: 14px; }
-
-  .page { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
-
-  .header { text-align: center; margin-bottom: 2rem; }
-  .header h1 { font-size: 30px; font-weight: 700; color: #f5a623; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.4rem; }
-  .header p { font-size: 13px; color: #888780; }
-
-  .metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 2rem; }
-  .metric { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 1rem; }
-  .metric-label { font-size: 11px; color: #888780; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
-  .metric-value { font-size: 26px; font-weight: 600; color: #1a1a18; }
-  .metric-value.ni { color: #185fa5; }
-  .metric-value.na { color: #993c1d; }
-
-  .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 2rem; }
-  .chart-card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 1rem 1.25rem; }
-  .chart-title { font-size: 12px; font-weight: 500; color: #5f5e5a; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem; }
-
-  .section-title { font-size: 11px; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
-
-  .is-card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; margin-bottom: 1.25rem; overflow: hidden; }
-  .is-header { padding: 0.9rem 1.25rem; border-bottom: 0.5px solid rgba(0,0,0,0.08); display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  .is-number { font-size: 15px; font-weight: 600; }
-  .is-meta { font-size: 12px; color: #888780; margin-top: 2px; }
-  .badge { display: inline-flex; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 6px; white-space: nowrap; }
-  .badge-inp { background: #faeeda; color: #854f0b; }
-  .badge-ni { background: #e6f1fb; color: #185fa5; }
-  .badge-na { background: #faece7; color: #993c1d; }
-
-  .is-info { padding: 0.6rem 1.25rem; background: #f9f8f6; border-bottom: 0.5px solid rgba(0,0,0,0.07); display: flex; flex-wrap: wrap; gap: 1.5rem; }
-  .info-item { font-size: 12px; color: #5f5e5a; }
-  .info-item strong { color: #1a1a18; font-weight: 500; }
-
-  table { width: 100%; border-collapse: collapse; }
-  th { font-size: 11px; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.55rem 1.25rem; text-align: left; border-bottom: 0.5px solid rgba(0,0,0,0.08); }
-  td { padding: 0.65rem 1.25rem; font-size: 13px; border-bottom: 0.5px solid rgba(0,0,0,0.05); }
-  tr:last-child td { border-bottom: none; }
-  .code { font-family: monospace; font-size: 12px; color: #444; }
-  .addr { font-family: monospace; font-size: 11px; color: #555; }
-
-  .conclusion { padding: 0.85rem 1.25rem; border-top: 0.5px solid rgba(0,0,0,0.07); background: #f9f8f6; }
-  .conclusion-label { font-size: 11px; color: #888780; margin-bottom: 3px; }
-  .conclusion-text { font-size: 13px; color: #1a1a18; line-height: 1.6; }
-
-  .updated { font-size: 11px; color: #b4b2a9; text-align: right; margin-top: 1.5rem; }
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #f5f4f0; color: #1a1a18; font-size: 14px; min-height: 100vh; }
+.header { background: #1a1a18; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 10; }
+.logo { color: #f5a623; font-size: 17px; font-weight: 700; letter-spacing: 0.06em; }
+.logo span { color: #888780; font-weight: 400; font-size: 13px; margin-left: 8px; letter-spacing: 0; }
+.nav { display: flex; gap: 4px; }
+.nav-btn { background: none; border: none; color: #b4b2a9; font-size: 13px; font-weight: 500; padding: 6px 16px; border-radius: 6px; cursor: pointer; transition: background 0.15s, color 0.15s; }
+.nav-btn:hover { background: rgba(255,255,255,0.08); color: #e8e7e2; }
+.nav-btn.active { background: rgba(245,166,35,0.15); color: #f5a623; }
+.page { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+.screen { display: none; }
+.screen.visible { display: block; }
+.metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 2rem; }
+.metric { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 1rem; }
+.metric-label { font-size: 11px; color: #888780; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+.metric-value { font-size: 26px; font-weight: 600; color: #1a1a18; }
+.metric-value.ni { color: #185fa5; }
+.metric-value.na { color: #993c1d; }
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 2rem; }
+.chart-card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 1rem 1.25rem; }
+.chart-title { font-size: 11px; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem; }
+.section-title { font-size: 11px; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+.is-card { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 12px; margin-bottom: 1.25rem; overflow: hidden; }
+.is-header { padding: 0.9rem 1.25rem; border-bottom: 0.5px solid rgba(0,0,0,0.08); display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.is-number { font-size: 15px; font-weight: 600; }
+.is-meta { font-size: 12px; color: #888780; margin-top: 2px; }
+.badge { display: inline-flex; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 6px; white-space: nowrap; }
+.badge-inp { background: #faeeda; color: #854f0b; }
+.badge-ni { background: #e6f1fb; color: #185fa5; }
+.badge-na { background: #faece7; color: #993c1d; }
+.badge-ok { background: #eaf3de; color: #3b6d11; }
+.is-info { padding: 0.6rem 1.25rem; background: #f9f8f6; border-bottom: 0.5px solid rgba(0,0,0,0.07); display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.info-item { font-size: 12px; color: #5f5e5a; }
+.info-item strong { color: #1a1a18; font-weight: 500; }
+table { width: 100%; border-collapse: collapse; }
+th { font-size: 11px; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.55rem 1.25rem; text-align: left; border-bottom: 0.5px solid rgba(0,0,0,0.08); }
+td { padding: 0.65rem 1.25rem; font-size: 13px; border-bottom: 0.5px solid rgba(0,0,0,0.05); }
+tr:last-child td { border-bottom: none; }
+.code { font-family: monospace; font-size: 12px; color: #444; }
+.addr { font-family: monospace; font-size: 11px; color: #555; }
+.conclusion { padding: 0.85rem 1.25rem; border-top: 0.5px solid rgba(0,0,0,0.07); background: #f9f8f6; }
+.conclusion-label { font-size: 11px; color: #888780; margin-bottom: 3px; }
+.conclusion-text { font-size: 13px; color: #1a1a18; line-height: 1.6; }
+.hist-item { background: #fff; border: 0.5px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.hist-left { flex: 1; min-width: 0; }
+.hist-is { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.hist-detail { font-size: 12px; color: #5f5e5a; line-height: 1.7; }
+.hist-right { text-align: right; flex-shrink: 0; }
+.hist-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 5px; }
+.hist-date { font-size: 11px; color: #b4b2a9; }
+.updated { font-size: 11px; color: #b4b2a9; text-align: right; margin-top: 1.5rem; }
 </style>
 </head>
 <body>
+
+<div class="header">
+  <div class="logo">ICQA <span>Análise IS · INP</span></div>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="showScreen('inicio', this)">Início</button>
+    <button class="nav-btn" onclick="showScreen('historico', this)">Histórico</button>
+  </nav>
+</div>
+
 <div class="page">
 
-  <div class="header">
-    <h1>Histórico de Análises — IS em INP</h1>
-    <p>Registro das IS analisadas, motivo de retenção e status de cada produto bloqueador.</p>
-  </div>
-
-  <div class="metrics">
-    <div class="metric"><div class="metric-label">IS Analisadas</div><div class="metric-value" id="m-is">2</div></div>
-    <div class="metric"><div class="metric-label">Produtos em NI</div><div class="metric-value ni" id="m-ni-prod">14</div></div>
-    <div class="metric"><div class="metric-label">Unidades em NI</div><div class="metric-value ni" id="m-ni-un">37</div></div>
-    <div class="metric"><div class="metric-label">Produtos em NA</div><div class="metric-value na" id="m-na-prod">1</div></div>
-    <div class="metric"><div class="metric-label">Unidades em NA</div><div class="metric-value na" id="m-na-un">1</div></div>
-  </div>
-
-  <div class="charts-row">
-    <div class="chart-card">
-      <div class="chart-title">Unidades bloqueadas por IS</div>
-      <div style="position:relative;height:180px;"><canvas id="chartIS" role="img" aria-label="Unidades bloqueadas por IS">IS 65426071: 12 unidades. IS 64545772: 26 unidades.</canvas></div>
+  <!-- INÍCIO -->
+  <div class="screen visible" id="screen-inicio">
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">IS em análise</div><div class="metric-value">2</div></div>
+      <div class="metric"><div class="metric-label">Produtos em NI</div><div class="metric-value ni">14</div></div>
+      <div class="metric"><div class="metric-label">Unidades em NI</div><div class="metric-value ni">37</div></div>
+      <div class="metric"><div class="metric-label">Produtos em NA</div><div class="metric-value na">1</div></div>
+      <div class="metric"><div class="metric-label">Unidades em NA</div><div class="metric-value na">1</div></div>
     </div>
-    <div class="chart-card">
-      <div class="chart-title">Distribuição NI vs NA</div>
-      <div style="position:relative;height:180px;"><canvas id="chartStatus" role="img" aria-label="Distribuição de unidades NI vs NA">NI: 37 unidades. NA: 1 unidade.</canvas></div>
-    </div>
-  </div>
-
-  <p class="section-title">IS Analisadas</p>
-
-  <!-- IS 65426071 -->
-  <div class="is-card">
-    <div class="is-header">
-      <div>
-        <div class="is-number">IS 65426071</div>
-        <div class="is-meta">Analisada em 12/jun/2026</div>
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Unidades bloqueadas por IS</div>
+        <div style="position:relative;height:180px;"><canvas id="chartIS" role="img" aria-label="Unidades bloqueadas por IS"></canvas></div>
       </div>
-      <span class="badge badge-inp">Em INP</span>
-    </div>
-    <div class="is-info">
-      <div class="info-item"><strong>Chegada:</strong> 18/abr/2026 07h18</div>
-      <div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div>
-      <div class="info-item"><strong>Doca:</strong> DK-0-035-000-00-00</div>
-      <div class="info-item"><strong>Responsável:</strong> Najla Ariane Alves Barbosa</div>
-    </div>
-    <table>
-      <thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><span class="code">ECBV77928</span></td><td>3</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">FXYO77701</span></td><td>8</td><td><span class="addr">NI-0-505-023-04-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">DDQN78004</span></td><td>1</td><td><span class="addr">NA-0-506-028-03-01</span></td><td><span class="badge badge-na">Não Apto</span></td></tr>
-      </tbody>
-    </table>
-    <div class="conclusion">
-      <div class="conclusion-label">Conclusão</div>
-      <div class="conclusion-text">IS retida em INP por 3 produtos não identificados: 11 unidades aguardam tratativa de NI (ECBV77928 e FXYO77701) e 1 unidade foi classificada como Não Apto (DDQN78004). Nenhum passou por processo de identificação ainda.</div>
-    </div>
-  </div>
-
-  <!-- IS 64545772 -->
-  <div class="is-card">
-    <div class="is-header">
-      <div>
-        <div class="is-number">IS 64545772</div>
-        <div class="is-meta">Analisada em 12/jun/2026</div>
+      <div class="chart-card">
+        <div class="chart-title">Distribuição NI vs NA</div>
+        <div style="position:relative;height:180px;"><canvas id="chartStatus" role="img" aria-label="NI vs NA"></canvas></div>
       </div>
-      <span class="badge badge-inp">Em INP</span>
     </div>
-    <div class="is-info">
-      <div class="info-item"><strong>Chegada:</strong> 07/abr/2026 09h48</div>
-      <div class="info-item"><strong>Vendedor:</strong> Mercado Livre Eletronicos</div>
-      <div class="info-item"><strong>Doca:</strong> DK-0-029-000-00-00</div>
-      <div class="info-item"><strong>Responsável:</strong> Idenilde Ligorio De Aragao</div>
+    <p class="section-title">IS em INP agora</p>
+
+    <div class="is-card">
+      <div class="is-header">
+        <div><div class="is-number">IS 65426071</div><div class="is-meta">Analisada em 12/jun/2026</div></div>
+        <span class="badge badge-inp">Em INP</span>
+      </div>
+      <div class="is-info">
+        <div class="info-item"><strong>Chegada:</strong> 18/abr/2026 07h18</div>
+        <div class="info-item"><strong>Vendedor:</strong> Mercado Livre Casa</div>
+        <div class="info-item"><strong>Doca:</strong> DK-0-035-000-00-00</div>
+        <div class="info-item"><strong>Responsável:</strong> Najla Ariane Alves Barbosa</div>
+      </div>
+      <table>
+        <thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><span class="code">ECBV77928</span></td><td>3</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">FXYO77701</span></td><td>8</td><td><span class="addr">NI-0-505-023-04-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">DDQN78004</span></td><td>1</td><td><span class="addr">NA-0-506-028-03-01</span></td><td><span class="badge badge-na">Não Apto</span></td></tr>
+        </tbody>
+      </table>
+      <div class="conclusion"><div class="conclusion-label">Conclusão</div><div class="conclusion-text">3 produtos não identificados: 11 unidades aguardam NI e 1 foi classificada como Não Apto.</div></div>
     </div>
-    <table>
-      <thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><span class="code">CTUX08102</span></td><td>1</td><td><span class="addr">NI-0-505-023-03-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">DIAI94431</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">EMAE08442</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">GHTD08403</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">KVVM09012</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">LLTI91907</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">MGGC08490</span></td><td>4</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">MPMJ93333</span></td><td>2</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">MQJY08351</span></td><td>3</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">PGJV95007</span></td><td>2</td><td><span class="addr">NI-0-505-023-01-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">UCFW08538</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-        <tr><td><span class="code">ZMDU91246</span></td><td>2</td><td><span class="addr">NI-0-505-023-04-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
-      </tbody>
-    </table>
-    <div class="conclusion">
-      <div class="conclusion-label">Conclusão</div>
-      <div class="conclusion-text">IS retida em INP por 12 produtos não identificados (26 unidades) distribuídos em endereços NI, todos aguardando tratativa. 25 outros produtos não identificados já foram tratados e saíram do INP.</div>
+
+    <div class="is-card">
+      <div class="is-header">
+        <div><div class="is-number">IS 64545772</div><div class="is-meta">Analisada em 12/jun/2026</div></div>
+        <span class="badge badge-inp">Em INP</span>
+      </div>
+      <div class="is-info">
+        <div class="info-item"><strong>Chegada:</strong> 07/abr/2026 09h48</div>
+        <div class="info-item"><strong>Vendedor:</strong> Mercado Livre Eletronicos</div>
+        <div class="info-item"><strong>Doca:</strong> DK-0-029-000-00-00</div>
+        <div class="info-item"><strong>Responsável:</strong> Idenilde Ligorio De Aragao</div>
+      </div>
+      <table>
+        <thead><tr><th>Código ML</th><th>Unidades</th><th>Endereço atual</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><span class="code">CTUX08102</span></td><td>1</td><td><span class="addr">NI-0-505-023-03-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">DIAI94431</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">EMAE08442</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">GHTD08403</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">KVVM09012</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">LLTI91907</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">MGGC08490</span></td><td>4</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">MPMJ93333</span></td><td>2</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">MQJY08351</span></td><td>3</td><td><span class="addr">NI-0-505-023-03-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">PGJV95007</span></td><td>2</td><td><span class="addr">NI-0-505-023-01-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">UCFW08538</span></td><td>2</td><td><span class="addr">NI-0-505-023-02-02</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+          <tr><td><span class="code">ZMDU91246</span></td><td>2</td><td><span class="addr">NI-0-505-023-04-01</span></td><td><span class="badge badge-ni">Aguardando NI</span></td></tr>
+        </tbody>
+      </table>
+      <div class="conclusion"><div class="conclusion-label">Conclusão</div><div class="conclusion-text">12 produtos não identificados (26 unidades) em NI, aguardando tratativa. 25 outros já foram tratados.</div></div>
     </div>
+
+    <p class="updated">Atualizado em 12/jun/2026</p>
   </div>
 
-  <p class="updated">Última atualização: 12/jun/2026</p>
+  <!-- HISTÓRICO -->
+  <div class="screen" id="screen-historico">
+    <p class="section-title">Histórico de análises</p>
+
+    <div class="hist-item">
+      <div class="hist-left">
+        <div class="hist-is">IS 65426071 — Mercado Livre Casa</div>
+        <div class="hist-detail">
+          Chegada: 18/abr/2026 · Doca: DK-0-035-000-00-00 · Resp.: Najla Ariane Alves Barbosa<br>
+          3 produtos bloqueadores · 11 un. em NI · 1 un. em NA (DDQN78004)
+        </div>
+      </div>
+      <div class="hist-right">
+        <div class="hist-tags">
+          <span class="badge badge-ni">2 × NI</span>
+          <span class="badge badge-na">1 × NA</span>
+          <span class="badge badge-inp">Em INP</span>
+        </div>
+        <div class="hist-date">Analisada em 12/jun/2026</div>
+      </div>
+    </div>
+
+    <div class="hist-item">
+      <div class="hist-left">
+        <div class="hist-is">IS 64545772 — Mercado Livre Eletronicos</div>
+        <div class="hist-detail">
+          Chegada: 07/abr/2026 · Doca: DK-0-029-000-00-00 · Resp.: Idenilde Ligorio De Aragao<br>
+          12 produtos bloqueadores · 26 un. em NI · 25 produtos já identificados
+        </div>
+      </div>
+      <div class="hist-right">
+        <div class="hist-tags">
+          <span class="badge badge-ni">12 × NI</span>
+          <span class="badge badge-inp">Em INP</span>
+        </div>
+        <div class="hist-date">Analisada em 12/jun/2026</div>
+      </div>
+    </div>
+
+    <p class="updated">2 análises registradas</p>
+  </div>
 
 </div>
 
 <script>
-const niColor = '#378ADD';
-const naColor = '#D85A30';
-const isColors = ['#185fa5','#0F6E56'];
+function showScreen(id, btn) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('visible');
+  btn.classList.add('active');
+  if (id === 'inicio') renderCharts();
+}
 
-new Chart(document.getElementById('chartIS'), {
-  type: 'bar',
-  data: {
-    labels: ['IS 65426071','IS 64545772'],
-    datasets: [{
-      label: 'Unidades bloqueadas',
-      data: [12, 26],
-      backgroundColor: isColors,
-      borderRadius: 6,
-      borderSkipped: false
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-      y: { grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { font: { size: 11 }, stepSize: 5 }, beginAtZero: true }
-    }
-  }
-});
-
-new Chart(document.getElementById('chartStatus'), {
-  type: 'doughnut',
-  data: {
-    labels: ['Aguardando NI (37)', 'Não Apto (1)'],
-    datasets: [{
-      data: [37, 1],
-      backgroundColor: [niColor, naColor],
-      borderWidth: 2,
-      borderColor: '#fff'
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'bottom',
-        labels: { font: { size: 11 }, padding: 12, boxWidth: 12, boxHeight: 12 }
-      }
-    },
-    cutout: '65%'
-  }
-});
+let chartsRendered = false;
+function renderCharts() {
+  if (chartsRendered) return;
+  chartsRendered = true;
+  new Chart(document.getElementById('chartIS'), {
+    type: 'bar',
+    data: { labels: ['IS 65426071','IS 64545772'], datasets: [{ data: [12,26], backgroundColor: ['#185fa5','#0F6E56'], borderRadius: 6, borderSkipped: false }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.06)' } } } }
+  });
+  new Chart(document.getElementById('chartStatus'), {
+    type: 'doughnut',
+    data: { labels: ['NI (37)', 'NA (1)'], datasets: [{ data: [37,1], backgroundColor: ['#378ADD','#D85A30'], borderWidth: 2, borderColor: '#fff' }] },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '65%', plugins: { legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 12, boxWidth: 12 } } } }
+  });
+}
+renderCharts();
 </script>
 </body>
 </html>
