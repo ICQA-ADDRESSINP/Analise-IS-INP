@@ -381,6 +381,22 @@ updateHistorico();
   window.addEventListener('resize',resize);
   document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
   for(let i=0;i<N;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.5+1});
+
+  // ── Comets ──
+  const comets=[];
+  let nextComet=Date.now()+(4000+Math.random()*6000);
+  function spawnComet(){
+    const fromLeft=Math.random()<.5;
+    const angle=(Math.random()*40-20)*Math.PI/180;
+    const speed=7+Math.random()*5;
+    const sx=fromLeft?-60:W+60;
+    const sy=Math.random()*H*.7+H*.05;
+    const vx=fromLeft?Math.cos(angle)*speed:-Math.cos(angle)*speed;
+    const vy=Math.sin(angle)*speed*(Math.random()<.5?1:-1);
+    const isAmber=Math.random()<.55;
+    comets.push({x:sx,y:sy,vx,vy,trail:[],maxT:25+Math.random()*20,sz:1.2+Math.random()*1.2,amber:isAmber});
+  }
+
   function draw(){
     ctx.clearRect(0,0,W,H);
     const g=ctx.createLinearGradient(0,0,W,H);
@@ -393,6 +409,37 @@ updateHistorico();
       if(md<MOUSE_R){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle=`rgba(180,160,255,${(1-md/MOUSE_R)*.5})`;ctx.lineWidth=.8;ctx.stroke();}
     }
     for(const p of particles){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(140,160,255,0.7)';ctx.fill();}
+
+    // Spawn comet
+    if(Date.now()>nextComet){spawnComet();nextComet=Date.now()+(7000+Math.random()*9000);}
+
+    // Draw comets
+    for(let i=comets.length-1;i>=0;i--){
+      const c=comets[i];
+      c.trail.push({x:c.x,y:c.y});
+      if(c.trail.length>c.maxT) c.trail.shift();
+      c.x+=c.vx; c.y+=c.vy;
+      if(c.x<-120||c.x>W+120||c.y<-120||c.y>H+120){comets.splice(i,1);continue;}
+      // Trail
+      for(let j=0;j<c.trail.length;j++){
+        const t=j/c.trail.length;
+        const a=t*t*0.55;
+        const r=c.sz*t*0.9;
+        ctx.beginPath();ctx.arc(c.trail[j].x,c.trail[j].y,Math.max(r,0.3),0,Math.PI*2);
+        ctx.fillStyle=c.amber?`rgba(245,166,35,${a*0.8})`:`rgba(180,200,255,${a*0.7})`;
+        ctx.fill();
+      }
+      // Head glow
+      const hx=c.x,hy=c.y;
+      const gr=ctx.createRadialGradient(hx,hy,0,hx,hy,c.sz*5);
+      gr.addColorStop(0,'rgba(255,255,255,0.95)');
+      gr.addColorStop(0.25,c.amber?'rgba(245,166,35,0.7)':'rgba(180,210,255,0.6)');
+      gr.addColorStop(0.6,c.amber?'rgba(245,166,35,0.15)':'rgba(100,150,255,0.1)');
+      gr.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.beginPath();ctx.arc(hx,hy,c.sz*5,0,Math.PI*2);
+      ctx.fillStyle=gr;ctx.fill();
+    }
+
     requestAnimationFrame(draw);
   }
   draw();
