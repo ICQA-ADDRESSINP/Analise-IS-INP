@@ -75,6 +75,8 @@ tr:last-child td{border-bottom:none}
 .no-results{text-align:center;padding:2rem;color:#7a7a76;font-size:13px;display:none}
 .empty-state{text-align:center;padding:4rem 1rem;color:#7a7a76}
 .empty-state p{font-size:13px;margin-top:.5rem}
+/* ── Spotlight cursor ── */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;background:radial-gradient(circle 280px at var(--mx,50%) var(--my,50%),rgba(255,255,255,0.045) 0%,rgba(255,255,255,0.015) 40%,transparent 70%);transition:background .05s ease}
 /* ── Ticker ── */
 .ticker-wrap{position:fixed;bottom:0;left:0;width:100%;background:#0a0a14;border-top:.5px solid rgba(245,166,35,.25);z-index:100;overflow:hidden;height:28px;display:flex;align-items:center}
 .ticker-track{display:flex;white-space:nowrap;animation:ticker-scroll 30s linear infinite}
@@ -356,6 +358,12 @@ function renderCharts(){
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{color:'#888780',font:{size:11},padding:10,boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:11}}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a'},title:{display:true,text:'Produtos NI',color:'#5f5e5a',font:{size:10}}},y1:{position:'right',beginAtZero:true,grid:{display:false},ticks:{color:'#5f5e5a',stepSize:2},title:{display:true,text:'Nº IS',color:'#5f5e5a',font:{size:10}}}}}
   });
 }
+// ── Spotlight ──
+document.addEventListener('mousemove',e=>{
+  document.documentElement.style.setProperty('--mx',e.clientX+'px');
+  document.documentElement.style.setProperty('--my',e.clientY+'px');
+});
+
 renderCharts();
 // applyArchived already handled inside renderCards via archived check
 checkEmptyInicio();
