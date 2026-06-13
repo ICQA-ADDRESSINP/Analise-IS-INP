@@ -14,14 +14,14 @@ body{font-family:system-ui,-apple-system,sans-serif;background-color:#0d0d1a;bac
 .top,.page{position:relative;z-index:1}
 .top{text-align:center;padding:2.5rem 1.5rem 0}
 .top h1{font-size:28px;font-weight:700;color:#f5a623;text-transform:uppercase;letter-spacing:.02em;margin-bottom:.4rem}
-.top p{font-size:13px;color:#888780;margin-bottom:1.5rem}
+.top p{font-size:13px;color:#b4b2a9;margin-bottom:1.5rem}
 .nav{display:flex;justify-content:center;gap:6px;margin-bottom:1.5rem}
-.nav-btn{background:#2c2c2a;border:.5px solid rgba(255,255,255,.1);color:#888780;font-size:13px;font-weight:500;padding:7px 22px;border-radius:8px;cursor:pointer;transition:all .15s}
+.nav-btn{background:#2c2c2a;border:.5px solid rgba(255,255,255,.1);color:#b4b2a9;font-size:13px;font-weight:500;padding:7px 22px;border-radius:8px;cursor:pointer;transition:all .15s}
 .nav-btn:hover{background:#383836;color:#e8e7e2}
 .nav-btn.active{background:rgba(245,166,35,.15);border-color:rgba(245,166,35,.4);color:#f5a623}
 .search-wrap{max-width:480px;margin:0 auto 1.75rem;position:relative}
 .search-wrap input{width:100%;background:rgba(255,255,255,0.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:.5px solid rgba(255,255,255,.15);border-radius:9px;padding:9px 16px 9px 38px;font-size:13px;color:#e8e7e2;outline:none;transition:border-color .15s}
-.search-wrap input::placeholder{color:#5f5e5a}
+.search-wrap input::placeholder{color:#9e9d98}
 .search-wrap input:focus{border-color:rgba(245,166,35,.4)}
 .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.4;pointer-events:none}
 .page{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem}
@@ -29,20 +29,20 @@ body{font-family:system-ui,-apple-system,sans-serif;background-color:#0d0d1a;bac
 .screen.visible{display:block}
 .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:2rem}
 .metric{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:.5px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem}
-.metric-label{font-size:11px;color:#5f5e5a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.metric-label{font-size:11px;color:#9e9d98;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
 .metric-value{font-size:26px;font-weight:600;color:#e8e7e2}
 .metric-value.ni{color:#378ADD}
 .metric-value.na{color:#D85A30}
 .charts-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1rem}
 .charts-row2{margin-bottom:2rem}
 .chart-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:.5px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem 1.25rem}
-.chart-title{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.75rem}
-.stitle{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.chart-title{font-size:11px;font-weight:500;color:#9e9d98;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.75rem}
+.stitle{font-size:11px;font-weight:500;color:#9e9d98;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
 .is-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:.5px solid rgba(255,255,255,.12);border-radius:12px;margin-bottom:1.25rem;overflow:hidden}
 .is-card.ml-seller{border-left:3px solid rgba(245,166,35,.6)}
 .is-header{padding:.9rem 1.25rem;border-bottom:.5px solid rgba(255,255,255,.07);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .is-number{font-size:15px;font-weight:600;color:#e8e7e2}
-.is-meta{font-size:12px;color:#5f5e5a;margin-top:2px}
+.is-meta{font-size:12px;color:#9e9d98;margin-top:2px}
 .badge{display:inline-flex;font-size:11px;font-weight:500;padding:3px 9px;border-radius:6px;white-space:nowrap}
 .badge-inp{background:rgba(245,166,35,.15);color:#f5a623}
 .badge-ni{background:rgba(55,138,221,.15);color:#378ADD}
@@ -51,36 +51,60 @@ body{font-family:system-ui,-apple-system,sans-serif;background-color:#0d0d1a;bac
 .badge-ml{background:rgba(245,166,35,.12);color:#f5a623;font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;letter-spacing:.02em}
 .is-header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .is-info{padding:.6rem 1.25rem;background:rgba(0,0,0,0.15);border-bottom:.5px solid rgba(255,255,255,.06);display:flex;flex-wrap:wrap;gap:1.5rem}
-.info-item{font-size:12px;color:#888780}
+.info-item{font-size:12px;color:#b4b2a9}
 .info-item strong{color:#d3d1c7;font-weight:500}
 table{width:100%;border-collapse:collapse}
-th{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.04em;padding:.55rem 1.25rem;text-align:left;border-bottom:.5px solid rgba(255,255,255,.07)}
+th{font-size:11px;font-weight:500;color:#9e9d98;text-transform:uppercase;letter-spacing:.04em;padding:.55rem 1.25rem;text-align:left;border-bottom:.5px solid rgba(255,255,255,.07)}
 td{padding:.65rem 1.25rem;font-size:13px;border-bottom:.5px solid rgba(255,255,255,.05);color:#d3d1c7}
 tr:last-child td{border-bottom:none}
 .code{font-family:monospace;font-size:12px;color:#b4b2a9}
-.addr{font-family:monospace;font-size:11px;color:#888780}
+.addr{font-family:monospace;font-size:11px;color:#b4b2a9}
 .conclusion{padding:.85rem 1.25rem;border-top:.5px solid rgba(255,255,255,.06);background:rgba(0,0,0,0.15)}
-.conclusion-label{font-size:11px;color:#5f5e5a;margin-bottom:3px}
+.conclusion-label{font-size:11px;color:#9e9d98;margin-bottom:3px}
 .conclusion-text{font-size:13px;color:#b4b2a9;line-height:1.6}
-.btn-arch{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);color:#888780;font-size:11px;font-weight:500;padding:4px 12px;border-radius:6px;cursor:pointer;transition:all .15s}
+.btn-arch{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);color:#b4b2a9;font-size:11px;font-weight:500;padding:4px 12px;border-radius:6px;cursor:pointer;transition:all .15s}
 .btn-arch:hover{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.3);color:#f5a623}
 .hist-item{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:.5px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .hist-left{flex:1;min-width:0}
 .hist-is{font-size:14px;font-weight:600;color:#e8e7e2;margin-bottom:4px}
-.hist-detail{font-size:12px;color:#888780;line-height:1.7}
+.hist-detail{font-size:12px;color:#b4b2a9;line-height:1.7}
 .hist-right{text-align:right;flex-shrink:0}
 .hist-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:5px}
-.hist-date{font-size:11px;color:#444441}
-.updated{font-size:11px;color:#444441;text-align:right;margin-top:1.5rem}
-.no-results{text-align:center;padding:2rem;color:#444441;font-size:13px;display:none}
-.empty-state{text-align:center;padding:4rem 1rem;color:#444441}
+.hist-date{font-size:11px;color:#7a7a76}
+.updated{font-size:11px;color:#7a7a76;text-align:right;margin-top:1.5rem}
+.no-results{text-align:center;padding:2rem;color:#7a7a76;font-size:13px;display:none}
+.empty-state{text-align:center;padding:4rem 1rem;color:#7a7a76}
 .empty-state p{font-size:13px;margin-top:.5rem}
+/* ── Ticker ── */
+.ticker-wrap{position:fixed;bottom:0;left:0;width:100%;background:#0a0a14;border-top:.5px solid rgba(245,166,35,.25);z-index:100;overflow:hidden;height:28px;display:flex;align-items:center}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker-scroll 30s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{font-size:11px;font-weight:500;color:#b4b2a9;padding:0 2.5rem;letter-spacing:.04em}
+.ticker-item .sep{color:#f5a623;margin:0 .6rem}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* ── Sides ── */
+.side-left,.side-right{position:fixed;top:0;width:3px;height:100%;z-index:5;pointer-events:none}
+.side-left{left:0;background:linear-gradient(180deg,transparent 0%,rgba(245,166,35,.3) 30%,rgba(245,166,35,.6) 50%,rgba(245,166,35,.3) 70%,transparent 100%)}
+.side-right{right:0;background:linear-gradient(180deg,transparent 0%,rgba(55,138,221,.3) 30%,rgba(55,138,221,.5) 50%,rgba(55,138,221,.3) 70%,transparent 100%)}
+.side-label{position:fixed;top:50%;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,166,35,.4);z-index:5;pointer-events:none}
+.side-label.left{left:8px;transform:translateY(-50%) rotate(-90deg);transform-origin:center}
+.side-label.right{right:8px;transform:translateY(-50%) rotate(90deg);transform-origin:center;color:rgba(55,138,221,.4)}
+/* ── Title box ── */
+.title-box{display:inline-block;background:rgba(245,166,35,.06);border:.5px solid rgba(245,166,35,.3);border-radius:10px;padding:.6rem 2rem .5rem;margin-bottom:.4rem}
+/* ── Font improvements ── */
+body{padding-bottom:28px}
 </style>
 </head>
 <body>
 <canvas id="bg-canvas"></canvas>
+<div class="side-left"></div>
+<div class="side-right"></div>
+<span class="side-label left">ICQA · BRRC03</span>
+<span class="side-label right">ADDRESS · INP</span>
 <div class="top">
-  <h1>Histórico de Análises — IS em INP</h1>
+  <div class="title-box">
+    <h1>Histórico de Análises — IS em INP</h1>
+  </div>
   <p>Registro das IS analisadas, motivo de retenção e status de cada produto bloqueador.</p>
   <nav class="nav">
     <button class="nav-btn active" onclick="showScreen('inicio',this)">Início</button>
@@ -100,7 +124,7 @@ tr:last-child td{border-bottom:none}
       <div class="metric"><div class="metric-label">Produtos em NI</div><div class="metric-value ni">164</div></div>
       <div class="metric"><div class="metric-label">Produtos em NA</div><div class="metric-value na">5</div></div>
       <div class="metric"><div class="metric-label">Sellers ML</div><div class="metric-value" style="color:#f5a623">22</div></div>
-      <div class="metric"><div class="metric-label">Outros Sellers</div><div class="metric-value" style="color:#888780">32</div></div>
+      <div class="metric"><div class="metric-label">Outros Sellers</div><div class="metric-value" style="color:#b4b2a9">32</div></div>
     </div>
     <div class="charts-row">
       <div class="chart-card"><div class="chart-title">Top IS por produtos bloqueados</div><div style="position:relative;height:200px"><canvas id="chartIS" role="img" aria-label="Top IS bloqueadas"></canvas></div></div>
@@ -287,7 +311,7 @@ function updateHistorico(){
   document.querySelectorAll('#hist-list .hist-item').forEach(item=>{
     const isNum=item.querySelector('.hist-is')?.textContent.split('—')[0].replace('IS ','').trim();
     if(archived.includes(isNum)&&!item.querySelector('.badge-arch')){
-      const t=document.createElement('span');t.className='badge badge-arch';t.style.cssText='background:rgba(255,255,255,.08);color:#888780';t.textContent='Arquivada';item.querySelector('.hist-tags')?.appendChild(t);
+      const t=document.createElement('span');t.className='badge badge-arch';t.style.cssText='background:rgba(255,255,255,.08);color:#b4b2a9';t.textContent='Arquivada';item.querySelector('.hist-tags')?.appendChild(t);
     }
   });
 }
@@ -366,5 +390,14 @@ updateHistorico();
   draw();
 })();
 </script>
+<!-- Ticker letreiro rolante -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Desenvolvido por Vitor Vitorio<span class="sep">|</span>Team Leader ICQA - BRRC03<span class="sep">|</span>Desenvolvido com MELI Cowork + Claude AI<span class="sep">✦</span></span>
+    <span class="ticker-item">ICQA · Análise IS em INP<span class="sep">|</span>Dashboard de Endereços NI/NA<span class="sep">|</span>BRRC03 - Mercado Livre<span class="sep">✦</span></span>
+    <span class="ticker-item">Desenvolvido por Vitor Vitorio<span class="sep">|</span>Team Leader ICQA - BRRC03<span class="sep">|</span>Desenvolvido com MELI Cowork + Claude AI<span class="sep">✦</span></span>
+    <span class="ticker-item">ICQA · Análise IS em INP<span class="sep">|</span>Dashboard de Endereços NI/NA<span class="sep">|</span>BRRC03 - Mercado Livre<span class="sep">✦</span></span>
+  </div>
+</div>
 </body>
 </html>
