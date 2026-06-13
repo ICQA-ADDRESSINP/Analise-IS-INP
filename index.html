@@ -9,7 +9,7 @@
 <style>
 :root{color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,sans-serif;background:#0d0d1a;color:#e8e7e2;font-size:14px;min-height:100vh;overflow-x:hidden}
+body{font-family:system-ui,-apple-system,sans-serif;background-color:#0d0d1a;background-image:radial-gradient(rgba(255,255,255,0.035) 1px,transparent 1px);background-size:28px 28px;color:#e8e7e2;font-size:14px;min-height:100vh;overflow-x:hidden}
 #bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .top,.page{position:relative;z-index:1}
 .top{text-align:center;padding:2.5rem 1.5rem 0}
@@ -34,7 +34,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#0d0d1a;color:#e8
 .metric-value.ni{color:#378ADD}
 .metric-value.na{color:#D85A30}
 .charts-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1rem}
-.charts-row2{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:2rem}
+.charts-row2{margin-bottom:2rem}
 .chart-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:.5px solid rgba(255,255,255,.12);border-radius:10px;padding:1rem 1.25rem}
 .chart-title{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.75rem}
 .stitle{font-size:11px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
@@ -59,7 +59,7 @@ td{padding:.65rem 1.25rem;font-size:13px;border-bottom:.5px solid rgba(255,255,2
 tr:last-child td{border-bottom:none}
 .code{font-family:monospace;font-size:12px;color:#b4b2a9}
 .addr{font-family:monospace;font-size:11px;color:#888780}
-.conclusion{padding:.85rem 1.25rem;border-top:.5px solid rgba(255,255,255,.06);background:#1e1e1c}
+.conclusion{padding:.85rem 1.25rem;border-top:.5px solid rgba(255,255,255,.06);background:rgba(0,0,0,0.15)}
 .conclusion-label{font-size:11px;color:#5f5e5a;margin-bottom:3px}
 .conclusion-text{font-size:13px;color:#b4b2a9;line-height:1.6}
 .btn-arch{background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);color:#888780;font-size:11px;font-weight:500;padding:4px 12px;border-radius:6px;cursor:pointer;transition:all .15s}
@@ -72,13 +72,12 @@ tr:last-child td{border-bottom:none}
 .hist-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:5px}
 .hist-date{font-size:11px;color:#444441}
 .updated{font-size:11px;color:#444441;text-align:right;margin-top:1.5rem}
+.no-results{text-align:center;padding:2rem;color:#444441;font-size:13px;display:none}
 .empty-state{text-align:center;padding:4rem 1rem;color:#444441}
 .empty-state p{font-size:13px;margin-top:.5rem}
-.no-results{text-align:center;padding:2rem 1rem;color:#444441;font-size:13px;display:none}
 </style>
 </head>
 <body>
-
 <canvas id="bg-canvas"></canvas>
 <div class="top">
   <h1>Histórico de Análises — IS em INP</h1>
@@ -88,57 +87,137 @@ tr:last-child td{border-bottom:none}
     <button class="nav-btn" onclick="showScreen('historico',this)">Histórico</button>
   </nav>
 </div>
-
 <div class="page">
   <div class="search-wrap">
     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#e8e7e2" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     <input type="text" id="searchInput" placeholder="Buscar por IS, vendedor, responsável, código ML, endereço…" oninput="doSearch(this.value)">
   </div>
 
-  <!-- ══ INÍCIO ══ -->
+  <!-- INÍCIO -->
   <div class="screen visible" id="screen-inicio">
     <div class="metrics">
-      <div class="metric"><div class="metric-label">IS em análise</div><div class="metric-value" id="m-is">0</div></div>
-      <div class="metric"><div class="metric-label">Produtos em NI</div><div class="metric-value ni" id="m-ni-prod">0</div></div>
-      <div class="metric"><div class="metric-label">Unidades em NI</div><div class="metric-value ni" id="m-ni-un">0</div></div>
-      <div class="metric"><div class="metric-label">Produtos em NA</div><div class="metric-value na" id="m-na-prod">0</div></div>
-      <div class="metric"><div class="metric-label">Unidades em NA</div><div class="metric-value na" id="m-na-un">0</div></div>
+      <div class="metric"><div class="metric-label">IS em análise</div><div class="metric-value">61</div></div>
+      <div class="metric"><div class="metric-label">Produtos em NI</div><div class="metric-value ni">164</div></div>
+      <div class="metric"><div class="metric-label">Produtos em NA</div><div class="metric-value na">5</div></div>
+      <div class="metric"><div class="metric-label">Sellers ML</div><div class="metric-value" style="color:#f5a623">22</div></div>
+      <div class="metric"><div class="metric-label">Outros Sellers</div><div class="metric-value" style="color:#888780">32</div></div>
     </div>
-
     <div class="charts-row">
-      <div class="chart-card"><div class="chart-title">Produtos bloqueados por IS</div><div style="position:relative;height:200px"><canvas id="chartIS" role="img" aria-label="Produtos bloqueados por IS"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Top IS por produtos bloqueados</div><div style="position:relative;height:200px"><canvas id="chartIS" role="img" aria-label="Top IS bloqueadas"></canvas></div></div>
       <div class="chart-card"><div class="chart-title">Distribuição NI vs NA</div><div style="position:relative;height:200px"><canvas id="chartStatus" role="img" aria-label="NI vs NA"></canvas></div></div>
     </div>
-
     <div class="charts-row2">
-      <div class="chart-card"><div class="chart-title">⚠ Unidades bloqueadas — Sellers Mercado Livre</div><div style="position:relative;height:160px"><canvas id="chartML" role="img" aria-label="Sellers Mercado Livre"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">⚠ Produtos bloqueados — Sellers Mercado Livre</div><div style="position:relative;height:160px"><canvas id="chartML" role="img" aria-label="Sellers ML"></canvas></div></div>
     </div>
-
     <p class="stitle">IS em INP agora</p>
     <div id="is-list">
-      <div class="empty-state">
-        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#444441" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        <p>Nenhuma IS em análise ainda.</p>
-      </div>
+    <!-- IS CARDS INJECTED BY JS -->
     </div>
-    <p class="updated" id="updated-label" style="display:none"></p>
+    <p class="updated" id="updated-label">Atualizado em 12/jun/2026</p>
   </div>
 
-  <!-- ══ HISTÓRICO ══ -->
+  <!-- HISTÓRICO -->
   <div class="screen" id="screen-historico">
     <p class="stitle">Histórico de análises</p>
     <div id="hist-list">
-      <div class="empty-state">
-        <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#444441" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <p>Nenhuma análise arquivada ainda.</p>
-      </div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 69433201 — DJECOMM</div><div class="hist-detail">Chegada: 11/jun/2026 · Doca: DK-0-010 · Resp.: Rodrigo Lima Da Silva · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 69312618 — OS20241202141831</div><div class="hist-detail">Chegada: 11/jun/2026 · Doca: DK-0-008 · Resp.: Andrea Cardoso De Oliveira · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68783262 — LOJA DECATHLON</div><div class="hist-detail">Chegada: 11/jun/2026 · Doca: DK-0-001 · Resp.: Thalles Kaue De Assis Rodrigues · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 69281504 — CFVENDAS</div><div class="hist-detail">Chegada: 10/jun/2026 · Doca: DK-0-009 · Resp.: Luciano Santos Vieira · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 69290271 — JOSESOUSA1359</div><div class="hist-detail">Chegada: 10/jun/2026 · Doca: DK-0-009 · Resp.: Deborah Monique Silva De Lima · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 69020506 — BRASILDUART UTILIDADES</div><div class="hist-detail">Chegada: 10/jun/2026 · Doca: DK-0-010 · Resp.: Kayo Matos Da Silva · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68079864 — ALL PETS_</div><div class="hist-detail">Chegada: 10/jun/2026 · Doca: DK-0-001 · Resp.: Eliana Vilma Goes Da Silva · 2 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68781506 — JAIRANTONIODEOLIVEIRACALA</div><div class="hist-detail">Chegada: 10/jun/2026 · Doca: DK-0-001 · Resp.: Patricia Andrade Oliveira · 3 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">3×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 69290047 — LUCCA.RDF</div><div class="hist-detail">Chegada: 09/jun/2026 · Doca: DK-0-011 · Resp.: Isna Emelly Costa De Jesus · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68840418 — ECO BOX</div><div class="hist-detail">Chegada: 09/jun/2026 · Doca: DK-0-005 · Resp.: Adailton Nascimento Duraes · 2 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68106889 — TRP STORE</div><div class="hist-detail">Chegada: 08/jun/2026 · Doca: DK-0-011 · Resp.: Eliana Vilma Goes Da Silva · 5 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">5×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68092640 — REALTIMES</div><div class="hist-detail">Chegada: 08/jun/2026 · Doca: DK-0-003 · Resp.: Gabrielle Da Silva Franca · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67529022 — MELIDART</div><div class="hist-detail">Chegada: 06/jun/2026 · Doca: DK-0-006 · Resp.: Jessica Azevedo Medeiros · 1 NI · 1 NA</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-na">1×NA</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68551707 — DRAXION</div><div class="hist-detail">Chegada: 05/jun/2026 · Doca: DK-0-007 · Resp.: Thais Lana Do Carmo · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 69132935 — STYLEALFA</div><div class="hist-detail">Chegada: 04/jun/2026 · Doca: DK-0-009 · Resp.: Ronaldo Macedo Da Costa · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68937189 — LOJA DECATHLON</div><div class="hist-detail">Chegada: 03/jun/2026 · Doca: DK-0-008 · Resp.: Eliana Vilma Goes Da Silva · 2 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68875817 — COMS20240122145746</div><div class="hist-detail">Chegada: 03/jun/2026 · Doca: DK-0-010 · Resp.: Isna Emelly Costa De Jesus · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68416581 — YOX.TRADING</div><div class="hist-detail">Chegada: 29/mai/2026 · Doca: DK-0-016 · Resp.: Pedro Luca Souza De Figueiredo · Sem bloqueadores</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ok">Sem bloqueadores</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68418272 — THE_BLACK_TOOLS</div><div class="hist-detail">Chegada: 29/mai/2026 · Doca: DK-0-005 · Resp.: Nicoly Irislaine Pacheco Neves · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67968095 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 29/mai/2026 · Doca: DK-0-023 · Resp.: Jessica Santos Da Silva · 11 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">11×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67149329 — Mercado Livre Moda</div><div class="hist-detail">Chegada: 29/mai/2026 · Doca: DK-0-030 · Resp.: Giovanna Bispo Louzado Dos Santos · 12 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">12×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68429459 — MANDYTAELETROSHOP</div><div class="hist-detail">Chegada: 28/mai/2026 · Doca: DK-0-014 · Resp.: Bruno Miranda De Brito · 2 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67743160 — Mercado Livre Moda</div><div class="hist-detail">Chegada: 26/mai/2026 · Doca: DK-0-036 · Resp.: Fabiola Barbosa Martins · Sem bloqueadores</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ok">Sem bloqueadores</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67337888 — Mercado Livre Moda</div><div class="hist-detail">Chegada: 26/mai/2026 · Doca: DK-0-019 · Resp.: Ivair De Almeida · 3 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">3×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68109377 — LDJ MOTOS</div><div class="hist-detail">Chegada: 26/mai/2026 · Doca: DK-0-009 · Resp.: Kayo Matos Da Silva · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67999638 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 25/mai/2026 · Doca: DK-0-034 · Resp.: Rosemeire Ferreira De Almeida · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67965822 — BD2014</div><div class="hist-detail">Chegada: 25/mai/2026 · Doca: DK-0-009 · Resp.: Ellen Cristina Dos Santos · 2 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67932066 — CICDJBRXM81253</div><div class="hist-detail">Chegada: 25/mai/2026 · Doca: DK-0-009 · Resp.: Erica Santos Da Silva · 4 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">4×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67961855 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 25/mai/2026 · Doca: DK-0-020 · Resp.: Jeferson Rodrigues De Jesus · 13 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">13×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67863483 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 25/mai/2026 · Doca: DK-0-020 · Resp.: Jeferson Rodrigues De Jesus · 42 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">42×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 68259682 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 22/mai/2026 · Doca: DK-0-022 · Resp.: Claudionice Matos Pereira Nascimento · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65442446 — STEFANOSHOPPING</div><div class="hist-detail">Chegada: 23/mai/2026 · Doca: DK-0-008 · Resp.: Andrea Cardoso De Oliveira · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67329444 — LIPE409523</div><div class="hist-detail">Chegada: 21/mai/2026 · Doca: DK-0-007 · Resp.: Thais Lana Do Carmo · 3 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">3×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67743812 — Mercado Livre Moda</div><div class="hist-detail">Chegada: 20/mai/2026 · Doca: DK-0-020 · Resp.: Rebeca Carvalho Da Silva · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67612257 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 19/mai/2026 · Doca: DK-0-018 · Resp.: Ernandi Eleuterio Da Silva · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66441300 — VELOXXPRODUTOS</div><div class="hist-detail">Chegada: 19/mai/2026 · Doca: DK-0-003 · Resp.: Debora Araujo De Oliveira · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67614324 — CASA_EESTILO</div><div class="hist-detail">Chegada: 18/mai/2026 · Doca: DK-0-002 · Resp.: Neusa Maria De Souza Da Silva · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66617320 — TECHW0RLD</div><div class="hist-detail">Chegada: 18/mai/2026 · Doca: DK-0-008 · Resp.: Thais Lana Do Carmo · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 67323264 — SAUDEVITAE</div><div class="hist-detail">Chegada: 15/mai/2026 · Doca: DK-0-009 · Resp.: Alexsander Da Silva Francisco · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66379360 — ZILAK JEANS</div><div class="hist-detail">Chegada: 14/mai/2026 · Doca: DK-0-014 · Resp.: David Soares Araujo · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66699109 — TYDISTRIBUIDORASP</div><div class="hist-detail">Chegada: 14/mai/2026 · Doca: DK-0-007 · Resp.: Neusa Maria De Souza Da Silva · 2 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66354908 — LEMBOPISCINASIILTDA</div><div class="hist-detail">Chegada: 12/mai/2026 · Doca: DK-0-009 · Resp.: Erica Santos Da Silva · Produto já tratado</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ok">Tratado</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66434548 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 12/mai/2026 · Doca: DK-0-019 · Resp.: Willian Nogueira Ribeiro · Sem bloqueadores</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ok">Sem bloqueadores</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65701367 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 07/mai/2026 · Doca: DK-0-033 · Resp.: Isabella Florencio Fialho · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66369941 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 06/mai/2026 · Doca: DK-0-040 · Resp.: Solange De Andrade Silva Eduardo · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66640767 — Mercado Livre Brasil</div><div class="hist-detail">Chegada: 02/mai/2026 · Doca: DK-0-016 · Resp.: Cristiane Chagas Da Silva · 1 NA</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-na">1×NA</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65633383 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 01/mai/2026 · Doca: DK-0-040 · Resp.: Ketilyn Fernanda De Sousa Cocco · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66527409 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 30/abr/2026 · Doca: DK-0-021 · Resp.: Ana Julia Santana De Almeida · Sem bloqueadores</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ok">Sem bloqueadores</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66128671 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 28/abr/2026 · Doca: DK-0-037 · Resp.: Ernandi Eleuterio Da Silva · 5 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">5×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65451234 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 25/abr/2026 · Doca: DK-0-045 · Resp.: Tatiana De Souza Alonso · Sem bloqueadores</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ok">Sem bloqueadores</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 66039520 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 24/abr/2026 · Doca: DK-0-032 · Resp.: Gabriela Dos Santos Soares · 4 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">4×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64471900 — Mercado Livre Moda</div><div class="hist-detail">Chegada: 24/abr/2026 · Doca: DK-0-032 · Resp.: Gabriela Dos Santos Soares · Sem bloqueadores</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ok">Sem bloqueadores</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64961411 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 23/abr/2026 · Doca: DK-0-019 · Resp.: Juliana Da Silva De Oliveira · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65426071 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 18/abr/2026 · Doca: DK-0-035 · Resp.: Najla Ariane Alves Barbosa · 2 NI · 1 NA</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-na">1×NA</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64819979 — TULIPA.STORE</div><div class="hist-detail">Chegada: 15/abr/2026 · Doca: DK-0-015 · Resp.: Isna Emelly Costa De Jesus · 2 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 65337360 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 14/abr/2026 · Doca: DK-0-035 · Resp.: Nathaly De Moraes Queiroz · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64366234 — Mercado Livre Casa</div><div class="hist-detail">Chegada: 11/abr/2026 · Doca: DK-0-032 · Resp.: Jeferson Rodrigues De Jesus · 2 NI · 1 NA</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-na">1×NA</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64564762 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 09/abr/2026 · Doca: DK-0-020 · Resp.: Bruno Miranda De Brito · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64180825 — MULEKABAGS</div><div class="hist-detail">Chegada: 08/abr/2026 · Doca: DK-0-017 · Resp.: Jessica Oliveira Santos Vieira Andrade · 1 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">1×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64451077 — RR20240809081205</div><div class="hist-detail">Chegada: 07/abr/2026 · Doca: DK-0-010 · Resp.: Ednilson Lino Dos Santos · 2 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">2×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
+      <div class="hist-item"><div class="hist-left"><div class="hist-is">IS 64545772 — Mercado Livre Eletronicos</div><div class="hist-detail">Chegada: 07/abr/2026 · Doca: DK-0-029 · Resp.: Idenilde Ligorio De Aragao · 12 NI</div></div><div class="hist-right"><div class="hist-tags"><span class="badge badge-ni">12×NI</span><span class="badge badge-inp">Em INP</span></div><div class="hist-date">12/jun/2026</div></div></div>
     </div>
-    <p class="updated" id="hist-count" style="display:none"></p>
+    <p class="updated">61 análises registradas · 12/jun/2026</p>
   </div>
-
 </div>
 
 <script>
+// ── IS Data & Card Renderer ──
+const ML_SELLERS = ['Mercado Livre Eletronicos','Mercado Livre Casa','Mercado Livre Moda','Mercado Livre Brasil','Mercado Livre'];
+const IS_DATA = [{"id":"64545772","d":"07/abr/2026 09h48","v":"Mercado Livre Eletronicos","dk":"DK-0-029","r":"Idenilde Ligorio De Aragao","ni":12,"na":0,"compact":true},{"id":"64451077","d":"07/abr/2026 07h50","v":"RR20240809081205","dk":"DK-0-010","r":"Ednilson Lino Dos Santos","codes":[{"c":"UDVK70973","a":"NI-0-505-029-04-01","s":"ni"},{"c":"VXCS71067","a":"NI-0-505-029-06-01","s":"ni"}]},{"id":"64180825","d":"08/abr/2026 07h10","v":"MULEKABAGS","dk":"DK-0-017","r":"Jessica Oliveira Santos Vieira Andrade","codes":[{"c":"MMJY71014","a":"NI-0-505-029-06-01","s":"ni"}]},{"id":"64564762","d":"09/abr/2026 12h27","v":"Mercado Livre Eletronicos","dk":"DK-0-020","r":"Bruno Miranda De Brito","codes":[{"c":"NAUQ70863","a":"NI-0-505-023-01-01","s":"ni"}]},{"id":"64366234","d":"11/abr/2026 14h06","v":"Mercado Livre Casa","dk":"DK-0-032","r":"Jeferson Rodrigues De Jesus","codes":[{"c":"ZDFY72185","a":"NI-0-505-031-05-02","s":"ni"},{"c":"YNEY72813","a":"NI-0-505-027-03-01","s":"ni"},{"c":"KITY74503","a":"NA-0-506-026-03-01","s":"na"}]},{"id":"65337360","d":"14/abr/2026 19h31","v":"Mercado Livre Casa","dk":"DK-0-035","r":"Nathaly De Moraes Queiroz","codes":[{"c":"XJBX74444","a":"NI-0-505-031-01-01","s":"ni"}]},{"id":"64819979","d":"15/abr/2026 22h16","v":"TULIPA.STORE","dk":"DK-0-015","r":"Isna Emelly Costa De Jesus","codes":[{"c":"GFQU77045","a":"NI-0-505-027-03-02","s":"ni"},{"c":"KXQQ76474","a":"NI-0-505-029-06-02","s":"ni"}]},{"id":"65426071","d":"18/abr/2026 07h18","v":"Mercado Livre Casa","dk":"DK-0-035","r":"Najla Ariane Alves Barbosa","codes":[{"c":"ECBV77928","a":"NI-0-505-023-03-01","s":"ni"},{"c":"FXYO77701","a":"NI-0-505-023-04-02","s":"ni"},{"c":"DDQN78004","a":"NA-0-506-028-03-01","s":"na"}]},{"id":"64961411","d":"23/abr/2026 15h26","v":"Mercado Livre Casa","dk":"DK-0-019","r":"Juliana Da Silva De Oliveira","codes":[{"c":"OYZI86129","a":"NI-0-505-041-03-01","s":"ni"}]},{"id":"66039520","d":"24/abr/2026 20h01","v":"Mercado Livre Eletronicos","dk":"DK-0-032","r":"Gabriela Dos Santos Soares","codes":[{"c":"CUOD80219","a":"NI-0-505-023-02-01","s":"ni"},{"c":"PBSW79864","a":"NI-0-505-023-02-01","s":"ni"},{"c":"RJCA79095","a":"NI-0-505-023-04-01","s":"ni"},{"c":"XCBV80917","a":"NI-0-505-023-04-01","s":"ni"}]},{"id":"66128671","d":"28/abr/2026 05h29","v":"Mercado Livre Eletronicos","dk":"DK-0-037","r":"Ernandi Eleuterio Da Silva","codes":[{"c":"ESMW82025","a":"NI-0-500-026-00-00","s":"ni"},{"c":"EZII83237","a":"NI-0-500-030-00-00","s":"ni"},{"c":"JNXI82284","a":"NI-0-500-034-00-00","s":"ni"},{"c":"QHCR85160","a":"NI-0-500-028-00-00","s":"ni"},{"c":"ZTDG82655","a":"NI-0-500-036-00-00","s":"ni"}]},{"id":"65633383","d":"01/mai/2026 21h04","v":"Mercado Livre Casa","dk":"DK-0-040","r":"Ketilyn Fernanda De Sousa Cocco","codes":[{"c":"GNVE85572","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"66640767","d":"02/mai/2026 15h34","v":"Mercado Livre Brasil","dk":"DK-0-016","r":"Cristiane Chagas Da Silva","codes":[{"c":"ANGC84637","a":"NA-0-506-026-03-01","s":"na"}]},{"id":"66369941","d":"06/mai/2026 17h28","v":"Mercado Livre Casa","dk":"DK-0-040","r":"Solange De Andrade Silva Eduardo","codes":[{"c":"DOAE01790","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"65701367","d":"07/mai/2026 00h16","v":"Mercado Livre Casa","dk":"DK-0-033","r":"Isabella Florencio Fialho","codes":[{"c":"OGSY00935","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"66699109","d":"14/mai/2026 21h31","v":"TYDISTRIBUIDORASP","dk":"DK-0-007","r":"Neusa Maria De Souza Da Silva","codes":[{"c":"KHTP02931","a":"NI-0-505-029-03-02","s":"ni"},{"c":"ZXHH03021","a":"NI-0-505-029-03-02","s":"ni"}]},{"id":"66379360","d":"14/mai/2026 21h18","v":"ZILAK JEANS","dk":"DK-0-014","r":"David Soares Araujo","codes":[{"c":"IUJY04308","a":"NI-0-505-025-01-01","s":"ni"}]},{"id":"67323264","d":"15/mai/2026 07h14","v":"SAUDEVITAE","dk":"DK-0-009","r":"Alexsander Da Silva Francisco","codes":[{"c":"MCVK03861","a":"NI-0-505-029-02-02","s":"ni"}]},{"id":"66617320","d":"18/mai/2026 17h03","v":"TECHW0RLD","dk":"DK-0-008","r":"Thais Lana Do Carmo","codes":[{"c":"FRMW04781","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"67614324","d":"18/mai/2026 20h45","v":"CASA_EESTILO","dk":"DK-0-002","r":"Neusa Maria De Souza Da Silva","codes":[{"c":"YFLE89204","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"66441300","d":"19/mai/2026 13h58","v":"VELOXXPRODUTOS","dk":"DK-0-003","r":"Debora Araujo De Oliveira","codes":[{"c":"WWZB04137","a":"NI-0-505-025-03-02","s":"ni"}]},{"id":"67612257","d":"19/mai/2026 02h22","v":"Mercado Livre Casa","dk":"DK-0-018","r":"Ernandi Eleuterio Da Silva","codes":[{"c":"CWDH04144","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"67743812","d":"20/mai/2026 04h35","v":"Mercado Livre Moda","dk":"DK-0-020","r":"Rebeca Carvalho Da Silva","codes":[{"c":"KRUQ03819","a":"NI-0-505-025-03-02","s":"ni"}]},{"id":"67329444","d":"21/mai/2026 20h45","v":"LIPE409523","dk":"DK-0-007","r":"Thais Lana Do Carmo","codes":[{"c":"FVMH04641","a":"NI-0-505-025-03-02","s":"ni"},{"c":"LWEB04781","a":"NI-0-505-025-03-02","s":"ni"},{"c":"VWGK05376","a":"NI-0-505-025-03-02","s":"ni"}]},{"id":"65442446","d":"23/mai/2026 13h50","v":"STEFANOSHOPPING","dk":"DK-0-008","r":"Andrea Cardoso De Oliveira","codes":[{"c":"TUOL89863","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68259682","d":"22/mai/2026 19h25","v":"Mercado Livre Eletronicos","dk":"DK-0-022","r":"Claudionice Matos Pereira Nascimento","codes":[{"c":"AUPP08572","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"67863483","d":"25/mai/2026 07h30","v":"Mercado Livre Eletronicos","dk":"DK-0-020","r":"Jeferson Rodrigues De Jesus","ni":42,"na":0,"compact":true},{"id":"67961855","d":"25/mai/2026 07h29","v":"Mercado Livre Eletronicos","dk":"DK-0-020","r":"Jeferson Rodrigues De Jesus","ni":13,"na":0,"compact":true},{"id":"67932066","d":"25/mai/2026 16h10","v":"CICDJBRXM81253","dk":"DK-0-009","r":"Erica Santos Da Silva","codes":[{"c":"LLTI89289","a":"NI-0-505-025-02-01","s":"ni"},{"c":"UEQY05170","a":"NI-0-505-025-02-01","s":"ni"},{"c":"VKEO05542","a":"NI-0-505-025-02-01","s":"ni"},{"c":"WJHN05542","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"67965822","d":"25/mai/2026 11h53","v":"BD2014","dk":"DK-0-009","r":"Ellen Cristina Dos Santos","codes":[{"c":"DTIN90115","a":"NI-0-505-025-02-01","s":"ni"},{"c":"ZPDN90002","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"67999638","d":"25/mai/2026 15h38","v":"Mercado Livre Casa","dk":"DK-0-034","r":"Rosemeire Ferreira De Almeida","codes":[{"c":"VGMP93852","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68109377","d":"26/mai/2026 16h54","v":"LDJ MOTOS","dk":"DK-0-009","r":"Kayo Matos Da Silva","codes":[{"c":"GSMH05705","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"67337888","d":"26/mai/2026 09h49","v":"Mercado Livre Moda","dk":"DK-0-019","r":"Ivair De Almeida","codes":[{"c":"MJSA08276","a":"NI-0-505-025-02-01","s":"ni"},{"c":"PVPA95216","a":"NI-0-505-025-02-01","s":"ni"},{"c":"XFIG07940","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68429459","d":"28/mai/2026 12h52","v":"MANDYTAELETROSHOP","dk":"DK-0-014","r":"Bruno Miranda De Brito","codes":[{"c":"LWVT07328","a":"NI-0-505-025-02-01","s":"ni"},{"c":"MRXC06797","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"67149329","d":"29/mai/2026 10h32","v":"Mercado Livre Moda","dk":"DK-0-030","r":"Giovanna Bispo Louzado Dos Santos","ni":12,"na":0,"compact":true},{"id":"67968095","d":"29/mai/2026 09h04","v":"Mercado Livre Eletronicos","dk":"DK-0-023","r":"Jessica Santos Da Silva","ni":11,"na":0,"compact":true},{"id":"68418272","d":"29/mai/2026 19h43","v":"THE_BLACK_TOOLS","dk":"DK-0-005","r":"Nicoly Irislaine Pacheco Neves","codes":[{"c":"MRRX91768","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68875817","d":"03/jun/2026 20h16","v":"COMS20240122145746","dk":"DK-0-010","r":"Isna Emelly Costa De Jesus","codes":[{"c":"SHAD07344","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68937189","d":"03/jun/2026 16h45","v":"LOJA DECATHLON","dk":"DK-0-008","r":"Eliana Vilma Goes Da Silva","codes":[{"c":"KSMN07196","a":"NI-0-505-025-02-01","s":"ni"},{"c":"PLLO93689","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"69132935","d":"04/jun/2026 22h26","v":"STYLEALFA","dk":"DK-0-009","r":"Ronaldo Macedo Da Costa","codes":[{"c":"GKBT92080","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68551707","d":"05/jun/2026 16h53","v":"DRAXION","dk":"DK-0-007","r":"Thais Lana Do Carmo","codes":[{"c":"POXD07929","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"67529022","d":"06/jun/2026 13h06","v":"MELIDART","dk":"DK-0-006","r":"Jessica Azevedo Medeiros","codes":[{"c":"DRUU08435","a":"NI-0-505-025-02-01","s":"ni"},{"c":"GBGO08044","a":"NA-0-506-025-02-01","s":"na"}]},{"id":"68092640","d":"08/jun/2026 13h59","v":"REALTIMES","dk":"DK-0-003","r":"Gabrielle Da Silva Franca","codes":[{"c":"BZDS08868","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68106889","d":"08/jun/2026 15h33","v":"TRP STORE","dk":"DK-0-011","r":"Eliana Vilma Goes Da Silva","codes":[{"c":"PWHP08921","a":"NI-0-505-025-02-01","s":"ni"},{"c":"SMRI08749","a":"NI-0-505-025-02-01","s":"ni"},{"c":"TVHH93253","a":"NI-0-505-025-02-01","s":"ni"},{"c":"UNGV08712","a":"NI-0-505-025-02-01","s":"ni"},{"c":"ZYGG08564","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68840418","d":"09/jun/2026 02h20","v":"ECO BOX","dk":"DK-0-005","r":"Adailton Nascimento Duraes","codes":[{"c":"QZNE09229","a":"NI-0-505-025-02-01","s":"ni"},{"c":"RRHA08643","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"69290047","d":"09/jun/2026 17h02","v":"LUCCA.RDF","dk":"DK-0-011","r":"Isna Emelly Costa De Jesus","codes":[{"c":"BZSY93248","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68781506","d":"10/jun/2026 04h49","v":"JAIRANTONIODEOLIVEIRACALA","dk":"DK-0-001","r":"Patricia Andrade Oliveira","codes":[{"c":"LDQN08783","a":"NI-0-505-025-02-01","s":"ni"},{"c":"SXMO09229","a":"NI-0-505-025-02-01","s":"ni"},{"c":"TUHW94081","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68079864","d":"10/jun/2026 15h56","v":"ALL PETS_","dk":"DK-0-001","r":"Eliana Vilma Goes Da Silva","codes":[{"c":"KXMF08670","a":"NI-0-505-025-02-01","s":"ni"},{"c":"LRNX09479","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"69020506","d":"10/jun/2026 16h15","v":"BRASILDUART UTILIDADES","dk":"DK-0-010","r":"Kayo Matos Da Silva","codes":[{"c":"CUIW09240","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"69290271","d":"10/jun/2026 13h59","v":"JOSESOUSA1359","dk":"DK-0-009","r":"Deborah Monique Silva De Lima","codes":[{"c":"BHBB94719","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"69281504","d":"10/jun/2026 22h51","v":"CFVENDAS","dk":"DK-0-009","r":"Luciano Santos Vieira","codes":[{"c":"QLYJ08909","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"68783262","d":"11/jun/2026 16h50","v":"LOJA DECATHLON","dk":"DK-0-001","r":"Thalles Kaue De Assis Rodrigues","codes":[{"c":"LVFI09498","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"69312618","d":"11/jun/2026 10h42","v":"OS20241202141831","dk":"DK-0-008","r":"Andrea Cardoso De Oliveira","codes":[{"c":"QEIY09446","a":"NI-0-505-025-02-01","s":"ni"}]},{"id":"69433201","d":"11/jun/2026 19h18","v":"DJECOMM","dk":"DK-0-010","r":"Rodrigo Lima Da Silva","codes":[{"c":"UWXS09650","a":"NI-0-505-025-02-01","s":"ni"}]}];
+
+function renderCards(){
+  const archived=getArchived();
+  const isMl=v=>ML_SELLERS.some(m=>v.includes(m));
+  const badgeRow=(code)=>`<tr><td><span class="code">${code.c}</span></td><td><span class="addr">${code.a}</span></td><td><span class="badge badge-${code.s}">${code.s==='ni'?'Aguardando NI':'Não Apto'}</span></td></tr>`;
+  let html='';
+  for(const is of IS_DATA){
+    const ml=isMl(is.v);
+    const numDiv=ml?`<div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS ${is.id}</div><div class="is-meta">Analisada em 12/jun/2026</div></div></div>`:`<div><div class="is-number">IS ${is.id}</div><div class="is-meta">Analisada em 12/jun/2026</div></div>`;
+    const hdr=`<div class="is-header">${numDiv}<div class="is-header-right"><span class="badge badge-inp">Em INP</span><button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>`;
+    const info=`<div class="is-info"><div class="info-item"><strong>Chegada:</strong> ${is.d}</div><div class="info-item"><strong>Vendedor:</strong> ${is.v}</div><div class="info-item"><strong>Doca:</strong> ${is.dk}-000-00-00</div><div class="info-item"><strong>Responsável:</strong> ${is.r}</div></div>`;
+    let body='';
+    if(is.compact){
+      const niC=is.ni||0,naC=is.na||0;
+      body=`<div class="conclusion"><div class="conclusion-label">Bloqueadores</div><div class="conclusion-text">${niC} produto${niC!==1?'s':''} em NI${naC>0?' · '+naC+' Não Apto':''} · Aguardando tratativa.</div></div>`;
+    } else if(is.codes&&is.codes.length>0){
+      const rows=is.codes.map(badgeRow).join('');
+      const niC=is.codes.filter(c=>c.s==='ni').length,naC=is.codes.filter(c=>c.s==='na').length;
+      const concl=`${niC>0?niC+' produto'+( niC!==1?'s':'')+' aguardando NI':''}${naC>0?(niC>0?' · ':'')+naC+' Não Apto':''}.`;
+      body=`<table><thead><tr><th>Código ML</th><th>Endereço atual</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table><div class="conclusion"><div class="conclusion-label">Conclusão</div><div class="conclusion-text">${concl}</div></div>`;
+    }
+    const disp=archived.includes(is.id)?'style="display:none"':'';
+    html+=`<div class="is-card${ml?' ml-seller':''}" ${disp}>${hdr}${info}${body}</div>`;
+  }
+  document.getElementById('is-list').innerHTML=html;
+}
+renderCards();
+
 // ── Busca ──
 function doSearch(term){
   const q=term.trim().toLowerCase();
@@ -176,7 +255,6 @@ function doSearch(term){
 // ── Arquivar ──
 function getArchived(){try{return JSON.parse(localStorage.getItem('icqa_archived')||'[]');}catch{return[];}}
 function saveArchived(arr){localStorage.setItem('icqa_archived',JSON.stringify(arr));}
-
 function arquivar(btn){
   const card=btn.closest('.is-card');
   const isNum=card.querySelector('.is-number').textContent.replace('IS ','').trim();
@@ -187,7 +265,6 @@ function arquivar(btn){
   card.style.opacity='0';
   setTimeout(()=>{card.style.display='none';checkEmptyInicio();updateHistorico();},300);
 }
-
 function applyArchived(){
   const archived=getArchived();
   if(!archived.length) return;
@@ -198,15 +275,13 @@ function applyArchived(){
   checkEmptyInicio();
   updateHistorico();
 }
-
 function checkEmptyInicio(){
   const visible=[...document.querySelectorAll('#is-list .is-card')].filter(c=>c.style.display!=='none');
   let msg=document.getElementById('empty-inicio-msg');
   if(!visible.length){
-    if(!msg){msg=document.createElement('p');msg.id='empty-inicio-msg';msg.className='no-results';msg.style.display='block';msg.textContent='Nenhuma IS ativa no momento. Todas foram arquivadas.';document.getElementById('is-list').appendChild(msg);}
+    if(!msg){msg=document.createElement('p');msg.id='empty-inicio-msg';msg.className='no-results';msg.style.display='block';msg.textContent='Nenhuma IS ativa. Todas foram arquivadas.';document.getElementById('is-list').appendChild(msg);}
   } else if(msg) msg.remove();
 }
-
 function updateHistorico(){
   const archived=getArchived();
   document.querySelectorAll('#hist-list .hist-item').forEach(item=>{
@@ -216,7 +291,6 @@ function updateHistorico(){
     }
   });
 }
-
 function showScreen(id,btn){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('visible'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -230,112 +304,63 @@ function showScreen(id,btn){
 
 // ── Charts ──
 let chartsRendered=false;
-let chartISObj=null, chartStatusObj=null, chartMLObj=null;
-
 function renderCharts(){
   if(chartsRendered) return;
   chartsRendered=true;
-
-  chartISObj=new Chart(document.getElementById('chartIS'),{
-    type:'bar',
-    data:{labels:[],datasets:[{label:'Produtos bloqueados',data:[],backgroundColor:[],borderRadius:4,borderSkipped:false}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw} produto${ctx.raw!==1?'s':''} bloqueado${ctx.raw!==1?'s':''}`}}},scales:{x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:10}}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a',stepSize:1}}}}
-  });
-
-  chartStatusObj=new Chart(document.getElementById('chartStatus'),{
-    type:'doughnut',
-    data:{labels:['NI (0)','NA (0)'],datasets:[{data:[0,0],backgroundColor:['#378ADD','#D85A30'],borderWidth:2,borderColor:'#242422'}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:true,position:'bottom',labels:{color:'#888780',font:{size:11},padding:12,boxWidth:12}}}}
-  });
-
-  chartMLObj=new Chart(document.getElementById('chartML'),{
+  new Chart(document.getElementById('chartIS'),{
     type:'bar',
     data:{
-      labels:['ML Casa','ML Eletronicos','Outros sellers'],
+      labels:['67863483','67961855','64545772','67149329','67968095','67932066','66039520','67337888'],
+      datasets:[{label:'Produtos bloqueados',data:[42,13,12,12,11,4,4,3],backgroundColor:['#185fa5','#0F6E56','#5b6bb5','#8a3a8a','#3a6b8a','#6b3a8a','#3a8a6b','#8a6b3a'],borderRadius:4,borderSkipped:false}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw} produto${ctx.raw!==1?'s':''} bloqueado${ctx.raw!==1?'s':''}`}}},scales:{x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:10}}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a',stepSize:5}}}}
+  });
+  new Chart(document.getElementById('chartStatus'),{
+    type:'doughnut',
+    data:{labels:['NI (164)','NA (5)'],datasets:[{data:[164,5],backgroundColor:['#378ADD','#D85A30'],borderWidth:2,borderColor:'#0d0d1a'}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:true,position:'bottom',labels:{color:'#888780',font:{size:11},padding:12,boxWidth:12}}}}
+  });
+  new Chart(document.getElementById('chartML'),{
+    type:'bar',
+    data:{
+      labels:['ML Eletronicos','ML Moda','ML Casa','ML Brasil','Outros'],
       datasets:[
-        {label:'IS',data:[0,0,0],backgroundColor:'rgba(245,166,35,0.25)',borderColor:'rgba(245,166,35,0.6)',borderWidth:1,borderRadius:4,yAxisID:'y1'},
-        {label:'Unidades bloqueadas',data:[0,0,0],backgroundColor:['rgba(245,166,35,0.7)','rgba(245,100,35,0.7)','rgba(100,100,100,0.4)'],borderRadius:4,yAxisID:'y'}
+        {label:'IS',data:[8,4,9,1,32],backgroundColor:'rgba(245,166,35,0.25)',borderColor:'rgba(245,166,35,0.6)',borderWidth:1,borderRadius:4,yAxisID:'y1'},
+        {label:'Produtos NI',data:[89,18,11,0,46],backgroundColor:['rgba(245,166,35,0.75)','rgba(245,130,35,0.75)','rgba(245,100,35,0.75)','rgba(150,50,50,0.5)','rgba(100,100,100,0.4)'],borderRadius:4,yAxisID:'y'}
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{color:'#888780',font:{size:11},padding:12,boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:12}}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a'},title:{display:true,text:'Unidades',color:'#5f5e5a',font:{size:10}}},y1:{position:'right',beginAtZero:true,grid:{display:false},ticks:{color:'#5f5e5a',stepSize:1},title:{display:true,text:'Nº de IS',color:'#5f5e5a',font:{size:10}}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{color:'#888780',font:{size:11},padding:10,boxWidth:10}}},scales:{x:{grid:{display:false},ticks:{color:'#5f5e5a',font:{size:11}}},y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#5f5e5a'},title:{display:true,text:'Produtos NI',color:'#5f5e5a',font:{size:10}}},y1:{position:'right',beginAtZero:true,grid:{display:false},ticks:{color:'#5f5e5a',stepSize:2},title:{display:true,text:'Nº IS',color:'#5f5e5a',font:{size:10}}}}}
   });
 }
-
 renderCharts();
-applyArchived();
-</script>
-<script>
+// applyArchived already handled inside renderCards via archived check
+checkEmptyInicio();
+updateHistorico();
+
 // ── Particles background ──
 (function(){
   const canvas=document.getElementById('bg-canvas');
   const ctx=canvas.getContext('2d');
   let W,H,mouse={x:-999,y:-999};
-  const N=90, CONNECT=140, MOUSE_R=180;
+  const N=90,CONNECT=140,MOUSE_R=180;
   const particles=[];
-
   function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
   resize();
   window.addEventListener('resize',resize);
   document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
-
-  for(let i=0;i<N;i++) particles.push({
-    x:Math.random()*W, y:Math.random()*H,
-    vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4,
-    r:Math.random()*1.5+1
-  });
-
+  for(let i=0;i<N;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.5+1});
   function draw(){
     ctx.clearRect(0,0,W,H);
-    // gradient bg
     const g=ctx.createLinearGradient(0,0,W,H);
-    g.addColorStop(0,'#0d0d1a');
-    g.addColorStop(.5,'#0a0f2e');
-    g.addColorStop(1,'#0d0d1a');
-    ctx.fillStyle=g;
-    ctx.fillRect(0,0,W,H);
-
-    // move
-    for(const p of particles){
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>W) p.vx*=-1;
-      if(p.y<0||p.y>H) p.vy*=-1;
-    }
-
-    // connect
+    g.addColorStop(0,'#0d0d1a');g.addColorStop(.5,'#0a0f2e');g.addColorStop(1,'#0d0d1a');
+    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    for(const p of particles){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
     for(let i=0;i<N;i++){
-      for(let j=i+1;j<N;j++){
-        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<CONNECT){
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x,particles[i].y);
-          ctx.lineTo(particles[j].x,particles[j].y);
-          ctx.strokeStyle=`rgba(100,140,255,${(1-d/CONNECT)*.35})`;
-          ctx.lineWidth=.6;
-          ctx.stroke();
-        }
-      }
-      // mouse connection
-      const mx=particles[i].x-mouse.x, my=particles[i].y-mouse.y;
-      const md=Math.sqrt(mx*mx+my*my);
-      if(md<MOUSE_R){
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x,particles[i].y);
-        ctx.lineTo(mouse.x,mouse.y);
-        ctx.strokeStyle=`rgba(180,160,255,${(1-md/MOUSE_R)*.5})`;
-        ctx.lineWidth=.8;
-        ctx.stroke();
-      }
+      for(let j=i+1;j<N;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<CONNECT){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(100,140,255,${(1-d/CONNECT)*.35})`;ctx.lineWidth=.6;ctx.stroke();}}
+      const mx=particles[i].x-mouse.x,my=particles[i].y-mouse.y,md=Math.sqrt(mx*mx+my*my);
+      if(md<MOUSE_R){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle=`rgba(180,160,255,${(1-md/MOUSE_R)*.5})`;ctx.lineWidth=.8;ctx.stroke();}
     }
-
-    // dots
-    for(const p of particles){
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(140,160,255,0.7)';
-      ctx.fill();
-    }
-
+    for(const p of particles){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(140,160,255,0.7)';ctx.fill();}
     requestAnimationFrame(draw);
   }
   draw();
