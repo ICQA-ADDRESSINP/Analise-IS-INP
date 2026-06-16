@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -293,9 +293,7 @@ function renderCards(){
     const numDiv=ml?`<div style="display:flex;align-items:center;gap:8px"><span class="badge-ml">MELI</span><div><div class="is-number">IS ${is.id}</div><div class="is-meta">Analisada em 12/jun/2026</div></div></div>`:`<div><div class="is-number">IS ${is.id}</div><div class="is-meta">Analisada em 12/jun/2026</div></div>`;
     const statusBadge=is.status==='stage'?'<span class="badge badge-stage">Em Stage In</span>':'<span class="badge badge-inp">Em INP</span>';
     const hdr=`<div class="is-header">${numDiv}<div class="is-header-right">${statusBadge}<button class="btn-arch" onclick="arquivar(this)">Arquivar</button></div></div>`;
-    const tempo=tempoEmINP(is.d);
-    const tempoHtml=tempo?`<div class="info-item"><strong>Tempo em INP:</strong> <span style="color:#f5a623;font-weight:600">&#9201; ${tempo}</span></div>`:'';
-    const info=`<div class="is-info"><div class="info-item"><strong>Chegada:</strong> ${is.d}</div>${tempoHtml}<div class="info-item"><strong>Vendedor:</strong> ${is.v}</div><div class="info-item"><strong>Doca:</strong> ${is.dk}-000-00-00</div><div class="info-item"><strong>Respons&#225;vel:</strong> ${is.r}</div></div>`;
+    const info=`<div class="is-info"><div class="info-item"><strong>Chegada:</strong> ${is.d}</div><div class="info-item"><strong>Vendedor:</strong> ${is.v}</div><div class="info-item"><strong>Doca:</strong> ${is.dk}-000-00-00</div><div class="info-item"><strong>Respons&#225;vel:</strong> ${is.r}</div></div>`;
     let body='';
     if(is.compact){
       const niC=is.ni||0,naC=is.na||0;
@@ -547,3 +545,4 @@ updateHistorico();
 </div>
 </body>
 </html>
+
